@@ -1,0 +1,66 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /incomeExpense
+
+spring:
+   mvc:
+     view:
+       prefix: /   # 相对于webapp目录
+       suffix: .jsp
+
+     #首先系统有默认配置,其中默认配置的 /** 映射到 /static （或/public、/resources、/META-INF/resources）
+#     static-path-pattern: /**
+#   resources:
+#     static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
+
+   # 激活环境
+   profiles:
+     active: dev
+   # 已激活: pro
+   servlet:
+       multipart:
+         #单个文件上传大小
+         max-file-size: 10MB
+         #总数据上传大小
+         max-request-size: 100MB
+
+   #开启热部署
+   devtools:
+      restart:
+        enabled: true
+
+#mybatis配置
+mybatis:
+  #配置SQL映射文件路径
+  mapper-locations: classpath:mapper/*.xml
+  #配置别名
+  type-aliases-package: com.mzl.incomeexpensemanagesystem1.entity
+  #驼峰命名
+  configuration:
+    map-underscore-to-camel-case: false
+
+#   # 允许循环依赖
+#   main:
+#     allow-circular-references: true
+#
+#   # 统性能监控可视化界面的客户端，将Client作为服务注册到Server，通过Server来监听项目的运行情况【spring-boot-admin-client】
+#   boot:
+#     admin:
+#       client:
+#         enabled: true
+#         url: http://localhost:9999/incomeExpense  # 项目请求基础(根)路径
+#
+## 统性能监控监控，通过下面的配置启用所有的监控端点，默认情况下，这些端点是禁用的；【spring-boot-admin-client】
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
+#    httptrace:
+#      enabled: true
+
+
