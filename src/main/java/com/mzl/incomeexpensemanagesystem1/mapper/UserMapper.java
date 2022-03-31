@@ -41,4 +41,10 @@ public interface UserMapper {
 
     //进行修改用户信息
     void editUser(User user);
+
+    /**
+     * 删除用户
+     * @param uid
+     */
+    void delUser(int uid);
 }

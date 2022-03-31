@@ -32,4 +32,17 @@ public interface AdminMapper {
 
     //查询用户总记录数
     int countUsers();
+
+    /**
+     * 修改密码
+     * @param admin
+     */
+    void updatePasswordByUsername(Admin admin);
+
+    /**
+     * 通过用户名查询用户是否存在
+     * @param username
+     * @return
+     */
+    Admin queryUserByUsername(String username);
 }

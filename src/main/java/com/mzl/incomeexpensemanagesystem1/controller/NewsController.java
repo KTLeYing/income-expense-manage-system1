@@ -28,8 +28,6 @@ public class NewsController {
     //新闻列表
     @RequestMapping("/findNewsList.action")
     public String findNewsList(News news, Integer currentPage, Model model){
-        System.out.println(news);
-        System.out.println(currentPage);
         //无条件分页查询+有条件分页查询
         //查询条件：文章标题+文章作者+文章关键字     +  当前页
         //当前页，默认情况下，currentPage=0   提交过来是第1页
@@ -62,11 +60,9 @@ public class NewsController {
 
         //获取文章路径
         String thingPath= news.getnContent();
-        System.out.println(thingPath);
 
         //获取目标文件路径
         String realPath = thingPath;
-        System.out.println(realPath);
 
 //        String string = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 //        System.out.println(string);

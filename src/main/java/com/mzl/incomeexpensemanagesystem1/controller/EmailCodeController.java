@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -21,8 +22,7 @@ public class EmailCodeController {
 
     //发送邮箱验证码
     @RequestMapping("/emailCode.action")
-    public String emailCode(String email, HttpServletRequest request) throws IOException, MessagingException {
-        System.out.println(email);
+    public void emailCode(String email, HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
         //创建邮箱验证码的session会话对象
         HttpSession session = request.getSession();
         //发送新的验证码前，先移除之前的验证码session,保证每个验证码只能使用一次
@@ -31,12 +31,11 @@ public class EmailCodeController {
         //开始处理发送邮件
         EmailCodeUtil emailCodeUtil = new EmailCodeUtil();
         String emailCode = emailCodeUtil.sendEmail(email);
-        System.out.println(emailCode);
 
         //设置新的邮箱验证码session
         session.setAttribute("emailCode", emailCode);
 
-        return "";
+//        return "";
     }
 
 

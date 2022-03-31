@@ -4,10 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mzl.incomeexpensemanagesystem1.mapper.UserMapper">
 
+    <!--删除用户-->
+    <delete id="delUser">
+        delete from user where uid = #{uid}
+    </delete>
+
     <!-- 通过用户名和密码查询用户是否存在-->
     <select id="queryUserByUser" resultType="com.mzl.incomeexpensemanagesystem1.entity.User" parameterType="com.mzl.incomeexpensemanagesystem1.entity.User">
         select * from user
-        where username = #{username} and password = #{password}
+        where username = #{username}
     </select>
 
     <!--通过用户名查询用户是否存在-->

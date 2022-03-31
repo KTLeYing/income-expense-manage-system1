@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mzl.incomeexpensemanagesystem1.mapper.AdminMapper">
 
+    <update id="updatePasswordByUsername">
+        update admin set password = #{password} where adminname = #{adminname}
+    </update>
+
     <!--删除用户-->
     <delete id="deleteUser" parameterType="int">
         delete from user
@@ -13,7 +17,7 @@
     <!--用用户名和密码查找用户-->
     <select id="findAdmin" resultType="com.mzl.incomeexpensemanagesystem1.entity.Admin" parameterType="com.mzl.incomeexpensemanagesystem1.entity.Admin">
         select * from admin
-        where adminname = #{adminname} and password = #{password}
+        where adminname = #{adminname}
     </select>
 
     <!--用户的收支记录表记录数-->
@@ -48,6 +52,11 @@
     <select id="countUsers" resultType="java.lang.Integer">
         select count(*)
         from user
+    </select>
+
+    <!--通过用户名查询用户是否存在-->
+    <select id="queryUserByUsername" resultType="com.mzl.incomeexpensemanagesystem1.entity.Admin">
+        select * from admin where adminname = #{username}
     </select>
 
 </mapper>

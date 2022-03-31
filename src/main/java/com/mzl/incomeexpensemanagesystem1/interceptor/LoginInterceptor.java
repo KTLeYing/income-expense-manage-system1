@@ -41,15 +41,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 请求资源路径
         String requestUri = httpServletRequest.getRequestURI();
 //		   /financialManage/memorandum/listMemorandum.action
-		System.out.println("requestUri(请求资源路径，端口号后面的，即8080以后):"+requestUri);// 请求资源路径
+		log.info("requestUri(请求资源路径，端口号后面的，即8080以后):"+requestUri);// 请求资源路径
 
 		//   /financialManage
-		System.out.println("request.getContextPath()（即项目名或项目的war的Exploded包名）:"+ httpServletRequest.getContextPath());//项目名
+		log.info("request.getContextPath()（即项目名或项目的war的Exploded包名）:"+ httpServletRequest.getContextPath());//项目名
 
         if (requestUri.startsWith(httpServletRequest.getContextPath())) {// /financialManage
             requestUri = requestUri.substring(
                     httpServletRequest.getContextPath().length(), requestUri.length());
-            System.out.println("处理后的requestUri请资源路径（项目名或项目的war的Exploded名后名的路径）:" + requestUri);
+            log.info("处理后的requestUri请资源路径（项目名或项目的war的Exploded名后名的路径）:" + requestUri);
         }
 
 
@@ -78,7 +78,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (user != null) {
             return true;// 2) 如果用户已经登录。放行
         }
-        System.out.println("你的请求将被拦截，因为你还没登录，请先去完成登录...");
+        log.info("你的请求将被拦截，因为你还没登录，请先去完成登录...");
         // 3) 如果用户未登录，跳转到登录页面，跳转的过程中有可能被拦截，所以得做一个判断
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/index.jsp");//登录页面
         return false;//拦截

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
         //查询总记录数
         int allRecord = userMapper.findUsersCount(user);
-        System.out.println(allRecord);
+//        System.out.println(allRecord);
 
         //总页数
         int allPage = 0;
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
         //开始位置
         int startPosition = currentPage * pageRecord;
-        System.out.println(startPosition);
+//        System.out.println(startPosition);
 
         //用map封装分页查询的条件
         Map<String, Object> map = new HashMap<String, Object>();
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         //分页查询用户
         List<User> pageList = userMapper.findUsers(map);
-        System.out.println(pageList);
+//        System.out.println(pageList);
 
         //把数据封装在pagebean对象中，返回给用户列表页面
         //创建分页对象
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
         pageBean.setStartPosition(startPosition);
         pageBean.setAllPage(allPage);
 
-        System.out.println(pageBean);
+//        System.out.println(pageBean);
 
         return pageBean;
     }
@@ -120,6 +121,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void editUser(User user) {
         userMapper.editUser(user);
+    }
+
+    /**
+     * 删除注销用户
+     * @param request
+     */
+    @Override
+    public void delUser(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        //移除会话
+        request.getSession().removeAttribute("user");
+        //数据库删除用户
+        userMapper.delUser(user.getUid());
     }
 
 

@@ -40,7 +40,6 @@ public class ShouzhiRecordController {
     //账单明细      +分页查询  +多条件查询
     @RequestMapping(value = "findShouzhiRecord.action")
     public String findShouzhiRecord(ShouzhiRecord shouzhiRecord, HttpServletRequest request) throws UnsupportedEncodingException {
-        System.out.println("ddd");
         //获取当前页和用户
         int currentPage = 0;
         //使用错误   request.getAttribute("currentPage")!=null
@@ -64,7 +63,6 @@ public class ShouzhiRecordController {
             }
             if (shouzhiRecord.getSzr_comment() != null){
                 //			if(szr_comment!=null){
-				System.out.println("备注-----："+shouzhiRecord.getSzr_comment());
 //                String com = new String((shouzhiRecord.getSzr_comment()).getBytes("ISO-8859-1"),"utf-8");
 //				System.out.println("备注222-----："+com);
 //                System.out.println("备注222-----："+com);
@@ -102,7 +100,6 @@ public class ShouzhiRecordController {
 
         //分页记录
         request.setAttribute("pageBean", pageBean);
-        System.out.println("kkk");
         return "/jsp/main";//跳转到主页
     }
 
@@ -112,7 +109,6 @@ public class ShouzhiRecordController {
     public String toEdit(Long id,HttpServletRequest request){
 //		System.out.println("进入修改信息的页面........................................");
         //此处，注意id的类型！！！！！！！！！！
-        System.out.println("hhhhh");
         User user = (User) request.getSession().getAttribute("user");
         if(user==null){
             return "/index";//登录页面
@@ -148,7 +144,6 @@ public class ShouzhiRecordController {
         String jsonString = JSON.toJSONString(jsonMap);
 
         //调试结果
-        System.out.println("jsonString:\n"+jsonString);
 
         //当前类别  --无效
         //1）异步请求，设置request无效!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -178,7 +173,6 @@ public class ShouzhiRecordController {
     @RequestMapping("edit.action")
     @ResponseBody
     public String editShouzhiRecord(ShouzhiRecord shouzhiRecord, HttpServletRequest request){
-        System.out.println("dddd");
         //System.out.println("-----修改用户信息成功-----");
         User user = (User) request.getSession().getAttribute("user");
         if (user == null){
@@ -194,22 +188,17 @@ public class ShouzhiRecordController {
         //根据收支子类型，获得收支分类id  对象
         ShouzhiCategory shouzhiCategory = shouzhiCategoryService.findCategoryBySonCategory(shouzhiRecord.getShouzhiCategory().getSon_category());
         shouzhiRecord.setShouzhiCategory(shouzhiCategory);
-        System.out.println(shouzhiCategory);
 
         //加一道判断机制
         //为收入时，确保金额为为整数
         if ("收入".equals(shouzhiCategory.getParent_category())){
             int num = shouzhiRecord.getSzr_num();
-            System.out.println(num);
-            System.out.println("收入");
             if (num < 0){
                 //输入有误，所以变为正数
                 shouzhiRecord.setSzr_num(-num);
             }
         }else {//为支出时，确保金额为负数
             int num = shouzhiRecord.getSzr_num();
-            System.out.println(num);
-            System.out.println("支出");
             if (num > 0){
                 //输入有误，所以变为负数
                 shouzhiRecord.setSzr_num(-num);
@@ -254,21 +243,16 @@ public class ShouzhiRecordController {
         //通过收支类别id 查询是收入 还是 支出
         String cat = shouzhiRecordService.findParentCategoryById(szcid);
 
-        System.out.println("cat:----"+cat);
         //加一道判断机制
         //为收入时，确保金额为为正数
         if ("收入".equals(cat)){
             int num = shouzhiRecord.getSzr_num();
-            System.out.println(num);
-            System.out.println("收入");
             if (num < 0){
                 //输入有误，所以变为正数
                 shouzhiRecord.setSzr_num(-num);
             }
         }else {//为支出时，确保金额为负数
             int num = shouzhiRecord.getSzr_num();
-            System.out.println(num);
-            System.out.println("支出");
             if (num > 0){
                 //输入有误，所以变为负数
                 shouzhiRecord.setSzr_num(-num);

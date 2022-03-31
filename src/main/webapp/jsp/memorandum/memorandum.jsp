@@ -81,9 +81,9 @@
     <!-- 计算器 -->
     <!-- <script src="jquery-2.1.4.min.js"></script> -->
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath }/bootstrap/cal/SimpleCalculadorajQuery.css">
+          href="${pageContext.request.contextPath }/static/bootstrap/cal/SimpleCalculadorajQuery.css">
     <script
-            src="${pageContext.request.contextPath }/bootstrap/cal/SimpleCalculadorajQuery.js"></script>
+            src="${pageContext.request.contextPath }/static/bootstrap/cal/SimpleCalculadorajQuery.js"></script>
 
 
     <script type="text/javascript">
@@ -144,7 +144,7 @@
                 <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span> <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="background: #80CBC4"><span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent;">智能收支管理平台</span></a>
+            <a class="navbar-brand" style="background: #80CBC4"><span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent; font-weight: bold">智能收支管理平台</span></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
             <!-- 导航元素 -->
@@ -187,6 +187,12 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                    href="${pageContext.request.contextPath}/user/logout.action">
                             <span class="glyphicon glyphicon-log-out"></span>退出登录
+                        </a> <input type="hidden" id="uid" name="uid"
+                                    value="${sessionScope.user.uid }"></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="${pageContext.request.contextPath}/user/delUser">
+                            <span class="glyphicon glyphicon-log-out"></span>用户注销
                         </a> <input type="hidden" id="uid" name="uid"
                                     value="${sessionScope.user.uid }"></li>
                     </ul>

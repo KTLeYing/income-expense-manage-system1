@@ -133,7 +133,7 @@
                     class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" style="background: #80CBC4"> <span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent;">智能收支管理平台</span>
+            <a class="navbar-brand" style="background: #80CBC4"> <span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent; font-weight: bold">智能收支管理平台</span>
             </a>
         </div>
 
@@ -175,6 +175,12 @@
                             </a>
                             <input type="hidden" id="uid" name="uid" value="${sessionScope.user.uid }">
                         </li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="${pageContext.request.contextPath}/user/delUser">
+                            <span class="glyphicon glyphicon-log-out"></span>用户注销
+                        </a> <input type="hidden" id="uid" name="uid"
+                                    value="${sessionScope.user.uid }"></li>
                     </ul>
                 </li><!-- 用户设置范围 -->
             </ul>

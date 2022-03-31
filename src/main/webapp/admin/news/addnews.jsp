@@ -123,7 +123,7 @@
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="javascript:void(0)">智能收支管理平台后台管理</a>
+                        <a class="navbar-brand" href="javascript:void(0)"><span style="background: linear-gradient(to right, #FF9800, #18FFFF); -webkit-background-clip: text; color: transparent; font-weight: bold">智能收支管理平台后台管理</span></a>
                     </div>
                     <div>
                         <ul class="nav navbar-nav navbar-right">

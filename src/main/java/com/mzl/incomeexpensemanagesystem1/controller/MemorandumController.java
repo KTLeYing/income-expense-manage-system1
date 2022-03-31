@@ -79,11 +79,9 @@ public class MemorandumController {
         //根据备忘录路径，读取备忘录的文件内容，显示在页面上
         //备忘录的路径
         String thingPath = memorandum.getThingPath();
-        System.out.println(thingPath);
 
         //获取目标文件路径
         String realPath = thingPath;
-        System.out.println(realPath);
 //        String realPath = "D:\\Program Files\\MyFilesPractice(own)\\memorandum\\" + thingPath;
 
 //        String string = Thread.currentThread().getContextClassLoader().getResource("").getPath();
@@ -151,8 +149,6 @@ public class MemorandumController {
     //编辑备忘录
     @RequestMapping("/editMemorandum.action")
     public String editMemorandum(HttpServletRequest request, Memorandum memorandum, String editvalue, Model model, Integer currentPage) throws IOException{
-        System.out.println(memorandum);
-        System.out.println(editvalue);
 
         //需要修改 1、文件内容：覆盖原来的文件  2、文件的头80个字符
         User user = (User) request.getSession().getAttribute("user");
@@ -172,8 +168,6 @@ public class MemorandumController {
 
         //获取编辑器的内容
         String content = request.getParameter("editorValue");
-        System.out.println("ffff");
-        System.out.println(content);
 
         //写文件到那个路径
         String thingPath = memorandum.getThingPath();
@@ -181,7 +175,6 @@ public class MemorandumController {
         //获取目标文件路径
 //        String realPath = "D:\\Program Files\\MyFilesPractice(own)\\memorandum\\" + thingPath;
         String realPath = thingPath;
-        System.out.println(realPath);
 
 //        String string = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 //        System.out.println(string);
@@ -233,8 +226,6 @@ public class MemorandumController {
     //添加备忘录
     @RequestMapping("/addMemorandum.action")
     public String addMemorandum(HttpServletRequest request, String editvalue) throws IOException{
-        System.out.println(editvalue);
-
         User user = (User) request.getSession().getAttribute("user");
         if (user == null){
             return "/index";
@@ -273,7 +264,6 @@ public class MemorandumController {
 
         //生成唯一的文件名
         String filePath = generateUUIDName();
-        System.out.println("随机生成的文件名:" + filePath);
 
         //文件的全名（带后缀名）
         String thingPath = filePath + ".txt";
@@ -285,13 +275,11 @@ public class MemorandumController {
         File file1 = new File(path);
         if (!file1.exists()){
             file1.mkdir();  //创建文件夹
-            System.out.println("create dir success...");
         }
 
         //真正的文件路径
 //        String realPath = path + "\\" + thingPath;
         String realPath = path + "/" + thingPath;
-        System.out.println(realPath);
 
         //创建文件对象
         File file = new File(realPath);
@@ -326,7 +314,6 @@ public class MemorandumController {
     //删除备忘录
     @RequestMapping("/deleteMemorandum.action")
     public String deleteMemorandum(HttpServletRequest request, int mid, Integer currentPage){
-        System.out.println(currentPage);
 
         //删除备忘录
         memorandumService.deleteMemorandum(mid);
@@ -342,7 +329,6 @@ public class MemorandumController {
         int pageRecord = 6;
         //查询总记录数
         int allRecord = memorandumService.findMemorandumCount(uid);
-        System.out.println(allRecord);
 
         //处理返回的总页数
         int allPage = 0;

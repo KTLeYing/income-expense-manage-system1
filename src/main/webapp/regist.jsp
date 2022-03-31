@@ -68,9 +68,9 @@
             <!-- 注册主体框 -->
             <div class="main-box" style="background: rgba(255, 255, 255, 0.6)">
                 <img class="img-responsive" alt="财务管理系统"
-                     src="static/images/regist.jpg" id="logo">
+                     src="static/images/logo.png" id="logo">
                 <hr />
-                <h3>注册</h3>
+                <h3 style="font-weight: bold">用户注册</h3>
                 <!-- 访问路径     "${pageContext.request.contextPath}/user/regist.action"  -->
                 <form
                         action="${pageContext.request.contextPath}/user/regist.action"

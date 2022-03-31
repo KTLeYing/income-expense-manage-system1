@@ -6,14 +6,20 @@ import com.mzl.incomeexpensemanagesystem1.entity.PageBean;
 import com.mzl.incomeexpensemanagesystem1.entity.User;
 import com.mzl.incomeexpensemanagesystem1.service.AdminService;
 import com.mzl.incomeexpensemanagesystem1.service.UserService;
+import com.mzl.incomeexpensemanagesystem1.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,13 +43,20 @@ public class UserManageController {
     //管理员登录
     @RequestMapping("/login.action")
     public String login(Admin admin, HttpServletRequest request){
+
         //用用户名和密码查找用户
         Admin findAdmin = adminService.findAdmin(admin);
-        
-        System.out.println(findAdmin);
 
         if (findAdmin == null){
             request.setAttribute("msg", "登录失败，用户名或密码错误");
+            return "/admin/index";
+        }
+
+        if(!Md5Util.getSaltverifyMD5(admin.getPassword(), findAdmin.getPassword())){
+            //2.不存在，返回登录失败信息
+            String msg="登录失败，用户名或密码错误";
+            request.setAttribute("msg", msg);
+            //跳转到登录页面
             return "/admin/index";
         }
 
@@ -65,7 +78,7 @@ public class UserManageController {
     //分页查询用户
     @RequestMapping("/findUsers.action")
     public String findUsers(User user, Integer currentPage, Model model){
-        System.out.println(user);
+//        System.out.println(user);
         //查询条件：用户名+邮箱+设手机+当前页
         //当前页，默认下为0， 提交过来是第1页
 
@@ -85,6 +98,8 @@ public class UserManageController {
     //添加用户
     @RequestMapping("/addUser.action")
     public String addUser(User user, HttpServletRequest request){
+        //md5加密密码
+        user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
         //当前用户不存在时才可以进行添加用户（在前端进行校验）
         //添加用户
         userService.insertUser(user);
@@ -107,7 +122,7 @@ public class UserManageController {
 
         //转为json数据格式
         String jsonString = JSON.toJSONString(map);
-        System.out.println(jsonString);
+//        System.out.println(jsonString);
 
         return jsonString;
     }
@@ -115,6 +130,8 @@ public class UserManageController {
     //编辑用户信息
     @RequestMapping("/editUser.action")
     public String editUser(User user, Integer currentPage2){
+        //md5加密密码
+        user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
         //编辑全部用户信息
         userService.editUserAll(user);
         //重定向到用户分页列表
@@ -134,19 +151,19 @@ public class UserManageController {
         int count3 = 0;
         int count4 = 0;
 
-        System.out.println(count1);
+//        System.out.println(count1);
         if (count1 == 0){
             //用户的预算表记录
             count2 = adminService.countBudget(uid);
-            System.out.println(count2);
+//            System.out.println(count2);
             if (count2 == 0){
                 //用户的心愿表记录
                 count3 = adminService.countWishList(uid);
-                System.out.println(count3);
+//                System.out.println(count3);
                 if (count3 == 0){
                     //用户的备忘录
                     count4 = adminService.countMemorandum(uid);
-                    System.out.println(count4);
+//                    System.out.println(count4);
                     //count4等于0，证明其他表没数据，可以删除该用户
                     if (count4 == 0){
                         return "{\"name\":\"yes\"}";  //json格式
@@ -169,7 +186,7 @@ public class UserManageController {
         int pageRecord = 10;
         //查询用户总记录数
         int allRecord = adminService.countUsers();
-        System.out.println(allRecord);
+//        System.out.println(allRecord);
 
         //总页数
         int allPage = 0;
@@ -189,6 +206,61 @@ public class UserManageController {
         //重定向返回到原来的用户分页页面
         return "redirect:/userManage/findUsers.action?currentPage=" + currentPage2;
     }
+
+    /**
+     * 找回密码(修改密码，未登录)
+     * @param admin
+     * @param request
+     * @return
+     */
+    @RequestMapping("/findPassword")
+    public void findPassword(Admin admin, String msgCode, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int realCode = (int) request.getSession().getAttribute("msgCode");
+//        int realCode = 1234;
+        if (StringUtils.isEmpty(realCode) || !String.valueOf(realCode).equals(msgCode)){  //先判断验证码是否正确
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=utf-8");
+            request.setCharacterEncoding("utf-8");
+            response.getWriter().write("<script>alert('手机验证码错误！'); window.location='" + request.getContextPath() + "/userManage/toLogin';" +  "window.close();</script>");
+//            response.getWriter().write("<script>alert('手机验证码错误！'); </script>");
+//            return "/index";
+        }else {
+            //md5加密密码
+            admin.setPassword(Md5Util.getSaltMD5(admin.getPassword()));
+            adminService.updatePasswordByUsername(admin);
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=utf-8");
+            request.setCharacterEncoding("utf-8");
+            response.getWriter().write("<script>alert('找回密码成功！请重新登录！'); window.location='" + request.getContextPath() + "/userManage/toLogin';" +  "window.close();</script>");
+//            response.getWriter().write("<script>alert('找回密码成功！请重新登录！'); </script>");
+//            return "/index";
+        }
+    }
+
+    //通过用户名判断用户是否存在
+    @RequestMapping(value="findUserByNameAndAjax.action",method= RequestMethod.POST)
+    public @ResponseBody
+    String findUserByNameAndAjax(@RequestBody User user){
+        //@ResponseBody 返回将java对象转为json格式的数据
+        //@RequestBody 获得json格式的数据转为java对象
+
+        //通过用户名查询用户是否存在
+        Admin findUser = adminService.queryUserByUsername(user.getUsername());
+        if(findUser != null){
+            //存在
+            return "{\"name\":\"exit\"}";//json格式
+        }
+        else{
+            return "{\"name\":\"notexit\"}";//不存在
+        }
+    }
+
+    //去管理员登录页面
+    @RequestMapping("/toLogin")
+    public String login(){
+        return "/admin/index";
+    }
+
 
 
 

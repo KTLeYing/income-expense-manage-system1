@@ -64,9 +64,9 @@
     <div class="col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
       <!-- 登录主体框 -->
       <div class="main-box" style="background: rgba(255, 255, 255, 0.6)">
-        <img  class="img-responsive" alt="财务管理系统" src="static/images/logo.jpg" id="logo">
+        <img  class="img-responsive" alt="财务管理系统" src="static/images/logo.png" id="logo">
         <hr />
-        <h3>用户登录</h3>
+        <h3 style="font-weight: bold">用户登录</h3>
         <form
                 action="${pageContext.request.contextPath}/user/login.action "
                 id="myform" method="post" onsubmit="return validateForm()">

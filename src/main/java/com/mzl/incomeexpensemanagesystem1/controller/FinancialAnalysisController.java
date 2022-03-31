@@ -5,6 +5,7 @@ import com.mzl.incomeexpensemanagesystem1.entity.DayCount;
 import com.mzl.incomeexpensemanagesystem1.entity.MonthAnalysis;
 import com.mzl.incomeexpensemanagesystem1.service.FinacialAnalysisService;
 import com.mzl.incomeexpensemanagesystem1.service.ShouzhiRecordService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.Map;
  * @Version: 1.0
  */
 @Controller
+@Slf4j
 @RequestMapping("/financialAnalysis")
 public class FinancialAnalysisController {
 
@@ -46,10 +48,6 @@ public class FinancialAnalysisController {
         paramMap.put("currentTime", currentTime);
         paramMap.put("user_id", uid);
 
-        System.out.println(currentTime);
-        System.out.println(lastTime);
-        System.out.println(uid);
-
         //这个月收入的记录数
         int incomeRecordCount = finacialAnalysisService.findMonthIncomeRecordCount(paramMap);
         //这个月支出的记录数
@@ -58,12 +56,6 @@ public class FinancialAnalysisController {
         int incomeMoney = finacialAnalysisService.findMonthIncomeMoney(paramMap);
         //这个月的支出总额
         int spendsMoney = finacialAnalysisService.findMonthSpendMoney(paramMap);
-
-        System.out.println("这个月:");
-        System.out.println(incomeRecordCount);
-        System.out.println(spendsRecordCount);
-        System.out.println(incomeMoney);
-        System.out.println(spendsMoney);
 
         //总金额（收入 + 支出）
         int allMoney = incomeMoney + spendsMoney;
@@ -92,11 +84,6 @@ public class FinancialAnalysisController {
         //上个月的支出总金额
         int allMoney1 = incomeMoney1 + spendsMoney1;
 
-        System.out.println("上个月:");
-        System.out.println(incomeRecordCount1);
-        System.out.println(spendsRecordCount1);
-        System.out.println(incomeMoney1);
-        System.out.println(spendsMoney1);
 
         //封装月分析数据
         MonthAnalysis monthAnalysis1 = new MonthAnalysis();
@@ -112,7 +99,7 @@ public class FinancialAnalysisController {
         map.put("last", monthAnalysis1);  //上个月
 
         String jsonString = JSON.toJSONString(map);
-        System.out.println("json数据为：" + jsonString);
+        log.info("收支月分析=====>" + "数据:" + jsonString);
 
         return jsonString;  //携带json数据返回主页
 
@@ -123,16 +110,9 @@ public class FinancialAnalysisController {
     @ResponseBody
     public String monthCurrentDayAnalysis(String currentTimeDay, String lastTimeDay, String uid){
         //本月的数据
-        System.out.println("请求的参数：");
-        System.out.println(currentTimeDay);
-        System.out.println(lastTimeDay);
-        System.out.println(uid);
 
         int last = currentTimeDay.lastIndexOf("-"); //xxxx-xx-xx年-月-日
-        System.out.println("last为：" + last);
         String currentStart = currentTimeDay.substring(0, last) + "-01";  //xxxx-xx-01
-        System.out.println("currentStart为：" + currentStart);
-        System.out.println("end为：" + currentTimeDay);
 
         //当前月的起始时间,参数的封装
         Map<String, String> currentParamMap = new HashMap<String, String>();
@@ -150,16 +130,9 @@ public class FinancialAnalysisController {
         currentMap.put("incomes", incomes);
         currentMap.put("spends", spends);
 
-        System.out.println("currentMap:");
-        System.out.println(incomes);
-        System.out.println(spends);
-
         //上个月的数据
         int last1 = lastTimeDay.lastIndexOf("-"); //xxxx-xx-xx 年-月-日
-        System.out.println("last1为：" + last1);
         String currentStart1 = lastTimeDay.substring(0, last1) + "-01"; //xxxx-xx-01
-        System.out.println("currentStart1为：" + currentStart1);
-        System.out.println("end1为：" + lastTimeDay);
 
         //当前月的起始时间,封装参数
         Map<String, String> currentParamMap1 = new HashMap<String, String>();
@@ -176,10 +149,6 @@ public class FinancialAnalysisController {
         lastMap.put("incomes", incomes1);
         lastMap.put("spends", spends1);
 
-        System.out.println("lastMap:");
-        System.out.println(incomes1);
-        System.out.println(spends1);
-
         //把这个月的map数据和上个月的map数据封装在一个大的map中，转为json
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("current", currentMap);
@@ -187,7 +156,7 @@ public class FinancialAnalysisController {
 
         //转为json数据
         String jsonString = JSON.toJSONString(map);
-        System.out.println("当前月和上一个月：" + jsonString);
+        log.info("收支月-日分析=====>" + "数据:" + jsonString);
 
         return jsonString; // 携带json数据返回给主页
 

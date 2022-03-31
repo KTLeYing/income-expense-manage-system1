@@ -63,4 +63,23 @@ public class AdminServiceImpl implements AdminService {
     public int countUsers() {
         return adminMapper.countUsers();
     }
+
+    /**
+     * 修改密码
+     * @param admin
+     */
+    @Override
+    public void updatePasswordByUsername(Admin admin) {
+        adminMapper.updatePasswordByUsername(admin);
+    }
+
+    /**
+     * 通过用户名查询用户是否存在
+     * @param username
+     * @return
+     */
+    @Override
+    public Admin queryUserByUsername(String username) {
+        return adminMapper.queryUserByUsername(username);
+    }
 }

@@ -2,6 +2,7 @@ package com.mzl.incomeexpensemanagesystem1.controller;
 
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.utils.CaptchaUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,16 +18,16 @@ import java.io.IOException;
  * @Version: 1.0
  */
 @Controller
+@Slf4j
 public class CheckCodeController {
 
     //生成验证码
     @RequestMapping("/checkCode.action")
     public String checkCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("这个方法执行了...");
 
         GifCaptcha gifCaptcha = new GifCaptcha(130, 64, 4);
         String code = gifCaptcha.text();
-        System.out.println(code);
+        log.info("生成验证码=====>" + "验证码:" + code);
         request.getSession().setAttribute("checkCode", code);  //存入session
         CaptchaUtil.out(gifCaptcha, request, response);  //显示到前端页面
 

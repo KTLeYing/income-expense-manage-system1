@@ -34,10 +34,8 @@ public class ShouzhiCategoryController {
     @RequestMapping(value = "findsonCategoryByNameAndAjax.action", method = RequestMethod.POST)
     @ResponseBody
     public String findsonCategoryByNameAndAjax(String son_category){
-        System.out.println(son_category);
         //用收支子类型和父类型来查找收支的子类型对应各自是否存在
         ShouzhiCategory result = shouzhiCategoryService.findCategoryBySonCategory(son_category);
-        System.out.println(result);
         if(result!=null){
             return "{\"name\":\"exit\"}";//json格式
         }

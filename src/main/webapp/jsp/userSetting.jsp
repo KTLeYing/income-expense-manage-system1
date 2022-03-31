@@ -65,9 +65,9 @@
 
     <!-- 时间控件 -->
     <script type="text/javascript"
-            src="${pageContext.request.contextPath }/jedate/jquery.jedate.js"></script>
+            src="${pageContext.request.contextPath }/static/jedate/jquery.jedate.js"></script>
     <link type="text/css" rel="stylesheet"
-          href="${pageContext.request.contextPath }/jedate/skin/jedate.css">
+          href="${pageContext.request.contextPath }/static/jedate/skin/jedate.css">
 
 
     <!-- 计算器 -->
@@ -123,7 +123,7 @@
                 <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span> <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="background: #B3E5FC"><span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent;">智能收支管理平台</span></a>
+            <a class="navbar-brand" style="background: #B3E5FC"><span style="background: linear-gradient(to right, red, blue); -webkit-background-clip: text; color: transparent; font-weight: bold">智能收支管理平台</span></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
             <!-- 导航元素 -->
@@ -168,6 +168,13 @@
                             <span class="glyphicon glyphicon-log-out"></span>退出登录
                         </a> <input type="hidden" id="uid" name="uid"
                                     value="${sessionScope.user.uid }"></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="${pageContext.request.contextPath}/user/delUser">
+                            <span class="glyphicon glyphicon-log-out"></span>用户注销
+                        </a> <input type="hidden" id="uid" name="uid"
+                                    value="${sessionScope.user.uid }"></li>
+
                     </ul>
                 </li>
                 <!-- 用户设置范围 -->
@@ -186,7 +193,7 @@
         class="icon-bar"></span>
 </button>
 
-<a class="navbar-brand"> 收支管理系统 <!-- <img alt="收支管理系统" src="${pageContext.request.contextPath}/images/homePage.jpg"> -->
+<a class="navbar-brand"> 智能收支管理系统 <!-- <img alt="收支管理系统" src="${pageContext.request.contextPath}/images/homePage.jpg"> -->
 </a>
 </div>
 
@@ -231,6 +238,12 @@
                 <li role="presentation"><a role="menuitem" tabindex="-1"
                                            href="${pageContext.request.contextPath}/user/logout.action">
                     <span class="glyphicon glyphicon-log-out"></span>退出登录
+                </a> <input type="hidden" id="uid" name="uid"
+                            value="${sessionScope.user.uid }"></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1"
+                                           href="${pageContext.request.contextPath}/user/logout.action">
+                    <span class="glyphicon glyphicon-log-out"></span>用户注销
                 </a> <input type="hidden" id="uid" name="uid"
                             value="${sessionScope.user.uid }"></li>
             </ul>

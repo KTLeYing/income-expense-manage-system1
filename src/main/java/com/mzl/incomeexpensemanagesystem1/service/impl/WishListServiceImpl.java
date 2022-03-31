@@ -37,12 +37,12 @@ public class WishListServiceImpl implements WishListService {
         //每页的记录数
         int pageRecord = 6;
 
-        System.out.println("hhh");
-        System.out.println(uid);
+//        System.out.println("hhh");
+//        System.out.println(uid);
         //查询心愿总记录数
         int allRecord = wishListMapper.findWishListCount(uid);
-        System.out.println(allRecord);
-        System.out.println("yyy");
+//        System.out.println(allRecord);
+//        System.out.println("yyy");
 
         //总页数
         int allPage = 0;
@@ -73,7 +73,7 @@ public class WishListServiceImpl implements WishListService {
         pageBean.setCurrentPage(currentPage);
         pageBean.setStartPosition(startPoint);
 
-        System.out.println(pageBean);
+//        System.out.println(pageBean);
 
         return pageBean;
     }

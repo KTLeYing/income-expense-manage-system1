@@ -2,6 +2,7 @@ package com.mzl.incomeexpensemanagesystem1.controller;
 
 import com.mzl.incomeexpensemanagesystem1.entity.User;
 import com.mzl.incomeexpensemanagesystem1.service.UserService;
+import com.mzl.incomeexpensemanagesystem1.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -29,7 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //用户注册（添加用户）
+    //去登录页面
     @RequestMapping("/toLogin")
     public String login(){
         return "/index";
@@ -38,9 +39,6 @@ public class UserController {
     //用户登录
     @RequestMapping("login.action")
     public String login(User user, HttpServletRequest request, String checkCode){
-        System.out.println("用户名和密码："+user.getUsername()+" "+user.getPassword());
-        System.out.println(checkCode);
-
         //路径测试
 //        System.out.println(System.getProperty("catalina.home") + "\\webapps" + request.getContextPath().replace("/", "\\"));
 //        String path = request.getSession().getServletContext().getRealPath("/");
@@ -52,16 +50,11 @@ public class UserController {
 
         //获取checkcode会话
         String checkCode1 = (String) request.getSession().getAttribute("checkCode");
-        System.out.println(checkCode1);
 
         //判断验证码是否正确(忽略大小写)
         if (checkCode.equalsIgnoreCase(checkCode1)){//验证码相同
             //获得用户名和密码，判断是否存在
             User findUser = userService.queryUserByUser(user);
-            if (findUser != null){
-                System.out.println("查找的用户名和密码："+findUser.getUsername()+"::"+findUser.getPassword());
-            }
-            System.out.println("");
             //1.存在，保存到session中  ； 然后   跳转到主页面
             if (findUser != null){
                 HttpSession session = request.getSession();
@@ -70,8 +63,17 @@ public class UserController {
                 //通过父类型，从而查询出该父类型的所有子类型，从而进行显示
                 //List<String> son=shouzhiCategoryService.findSonCategoryByParent(parent_category);
                 //查询账单明细
-                return "redirect:/shouzhiRecord/findShouzhiRecord.action";
 
+                if(!Md5Util.getSaltverifyMD5(user.getPassword(), findUser.getPassword())){
+                    //2.不存在，返回登录失败信息
+                    String msg="用户名或者密码输入错误，请重新输入";
+                    request.setAttribute("msg", msg);
+                    request.getSession().removeAttribute("checkCode");
+                    //跳转到登录页面
+                    return "/index";
+                }
+
+                return "redirect:/shouzhiRecord/findShouzhiRecord.action";
                 //return "/jsp/main";//跳转到主页
             }else {
                 //2.不存在，返回登录失败信息
@@ -93,10 +95,11 @@ public class UserController {
     //用户注册（添加用户）
     @RequestMapping("regist.action")
     public String regist(User user, String repassword, String emailCode, HttpServletRequest request){
-        System.out.println("emailCode:" + emailCode);
         //获取验证码session（真正正确生成的验证码）
         String emailCode1 = (String) request.getSession().getAttribute("emailCode");
-        System.out.println("emailCode1:" + emailCode1);
+
+        //md5加密密码
+        user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
 
         //先判断验证码是否正确（忽略大小写）
         if(emailCode.equalsIgnoreCase(emailCode1)){//验证码正确
@@ -157,12 +160,10 @@ public class UserController {
         //通过用户名查询用户是否存在
         User findUser = userService.queryUserByUsername(user.getUsername());
         if(findUser != null){
-            System.out.println("{\"name\":\"exit\"}");
             //存在
             return "{\"name\":\"exit\"}";//json格式
         }
         else{
-            System.out.println("{\"name\":\"notexit\"}");
             return "{\"name\":\"notexit\"}";//不存在
         }
     }
@@ -170,6 +171,8 @@ public class UserController {
     //修改密码（找回密码）
     @RequestMapping("updatePasswordByUsername.action")
     public String updatePasswordByUsername(User user,HttpServletRequest request){
+        //md5加密密码
+        user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
         userService.updatePasswordByUsername(user);
         request.setAttribute("msg", "密码修改成功，请登录");
         return "/index";
@@ -183,24 +186,24 @@ public class UserController {
      */
     @RequestMapping("/findPassword.action")
     public void findPassword(User user, String msgCode, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("kkk");
         int realCode = (int) request.getSession().getAttribute("msgCode");
+//        int realCode = 1234;
         if (StringUtils.isEmpty(realCode) || !String.valueOf(realCode).equals(msgCode)){  //先判断验证码是否正确
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html;charset=utf-8");
             request.setCharacterEncoding("utf-8");
-            response.getWriter().write("<script>alert('手机验证码错误！'); window.location='" + request.getContextPath() + "/index';" +  "window.close();</script>");
+            response.getWriter().write("<script>alert('手机验证码错误！'); window.location='" + request.getContextPath() + "/';" +  "window.close();</script>");
 //            response.getWriter().write("<script>alert('手机验证码错误！'); </script>");
-            System.out.println("uuu");
 //            return "/index";
         }else {
+            //md5加密密码
+            user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
             userService.updatePasswordByUsername(user);
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html;charset=utf-8");
             request.setCharacterEncoding("utf-8");
-            response.getWriter().write("<script>alert('找回密码成功！请重新登录！'); window.location='" + request.getContextPath() + "/index';" +  "window.close();</script>");
+            response.getWriter().write("<script>alert('找回密码成功！请重新登录！'); window.location='" + request.getContextPath() + "/';" +  "window.close();</script>");
 //            response.getWriter().write("<script>alert('找回密码成功！请重新登录！'); </script>");
-            System.out.println("jjj");
 //            return "/index";
         }
     }
@@ -212,6 +215,22 @@ public class UserController {
         request.getSession().removeAttribute("user");
         //返回到登录页面
         return "/index";
+    }
+
+    /**
+     * 用户注销
+     * @param request
+     * @return
+     */
+    @RequestMapping("delUser")
+    public void delUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        userService.delUser(request);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        request.setCharacterEncoding("utf-8");
+        //返回到登录页面
+        response.getWriter().write("<script>alert('用户注销成功！'); window.location='" + request.getContextPath() + "/';" +  "window.close();</script>");
+//        return "/index";
     }
 
     //去用户设置页面
@@ -227,11 +246,10 @@ public class UserController {
     //编辑用户信息
     @RequestMapping("/editUser.action")
     public String editUser(User user, HttpServletRequest request, String oldusername){
-        System.out.println("oldusername:" + oldusername);
-        System.out.println("修改后的user信息：" + user);
         //判断修改后的用户号名是否存在
         String username = user.getUsername();
-        System.out.println(username);
+        //md5加密密码
+        user.setPassword(Md5Util.getSaltMD5(user.getPassword()));
 
         //在页面设置页面已经通过js的ajax实现了用户名判空和判是否已存在，在此次再一次判空和判是否存在，保证数据的正确性
         //用户名不为空
@@ -239,7 +257,6 @@ public class UserController {
             if(!username.equals(oldusername)){//新用户名和旧用户名不一样
                 //普安用户名是否已经存在
                 User findUser = userService.queryUserByUsername(username);
-                System.out.println(findUser);
                 if (findUser == null){//用户名不存在
                     //进行修改用户信息
                     userService.editUser(user);

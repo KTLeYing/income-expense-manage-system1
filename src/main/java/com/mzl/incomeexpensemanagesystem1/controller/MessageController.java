@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,8 +26,7 @@ public class MessageController {
      * 发送短信
      */
     @RequestMapping("/sendMsg.action")
-    public String sendMsg(String phone, HttpServletRequest request){
-        System.out.println("rrr");
+    public void sendMsg(String phone, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 发送短信
         SendSMSUtil sendSMS = new SendSMSUtil();
         String result = sendSMS.senSMSUtil(phone);
@@ -52,8 +54,13 @@ public class MessageController {
             e.printStackTrace();
         }
 
+//        response.setCharacterEncoding("utf-8");
+//        response.setContentType("text/html;charset=utf-8");
+//        request.setCharacterEncoding("utf-8");
+//        response.getWriter().write("<script>alert('找回密码成功！请重新登录！');</script>");
+
         //此接口必须有返回值才能调用jQuery的post的成功回调函数，不然不能回调
-        return "";
+//        return "";
     }
 
 

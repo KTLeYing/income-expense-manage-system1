@@ -72,9 +72,9 @@ public class NewsServiceImpl implements NewsService {
         pageBean.setStartPosition(startPosition);
         pageBean.setPageList(pageList);
 
-        System.out.println("allRecord：" + allRecord);
-        System.out.println("currentPage:"+currentPage);
-        System.out.println("pageList.size()"+pageList.size());
+//        System.out.println("allRecord：" + allRecord);
+//        System.out.println("currentPage:"+currentPage);
+//        System.out.println("pageList.size()"+pageList.size());
 
         return pageBean;
     }
@@ -94,8 +94,8 @@ public class NewsServiceImpl implements NewsService {
     //分页查询新闻列表
     @Override
     public PageBean<News> findNewsList(News news, Integer currentPage) {
-        System.out.println(news);
-        System.out.println(currentPage);
+//        System.out.println(news);
+//        System.out.println(currentPage);
 
         //当currentPage为空设置为0
         if (currentPage == null){
@@ -107,7 +107,7 @@ public class NewsServiceImpl implements NewsService {
 
         //总记录数
         int allRecord = newsMapper.findNewsCount(news);
-        System.out.println(allRecord);
+//        System.out.println(allRecord);
 
         //总页数
         int allPage = 0;

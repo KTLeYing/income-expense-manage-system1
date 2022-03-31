@@ -34,3 +34,25 @@ body{
 	margin-right:10px;
 }
 
+#forgetmsg{/*忘记密码框错误提示*/
+	color:red;
+	font-size: 4;
+	font-family: "宋体";
+}
+
+#disappare{
+	/*border: 2px solid 	#00A600;*/
+	/*background-color: #93FF93;*/
+	border: 2px solid DarkGray;
+	background-color: LightGrey;
+	border-radius: 5px;
+	color: 	black;
+	font-size: 14px;
+	position: absolute;
+	z-index:10;
+	left: 50%;
+	top: 50%;
+	height: 40px;
+	width: 110px;
+	text-align: center;
+}

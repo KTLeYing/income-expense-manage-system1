@@ -89,7 +89,6 @@ public class CategoryManageController {
 
         //转为json数据
         String jsonString = JSON.toJSONString(map);
-        System.out.println(jsonString);
 
         //返回给respose对象的body去，即js中的ajax的请求后回调函数那里
         return jsonString;
@@ -98,8 +97,6 @@ public class CategoryManageController {
     //修改收支类型
     @RequestMapping("/editShouzhiCategory.action")
     public String editShouzhiCategory(ShouzhiCategory shouzhiCategory, Integer currentPage2){
-        System.out.println(shouzhiCategory);
-        System.out.println(currentPage2);
         //修改收支子类型
         categoryManageService.editShouzhiCategory(shouzhiCategory);
 
@@ -113,7 +110,7 @@ public class CategoryManageController {
     public String ajaxConfirmDeleteShouzhiCategory(int szcid){
         //查询记录表中是否有使用该收支类型
         int count = categoryManageService.countCategory(szcid);
-        System.out.println(count);
+
         if (count == 0){//可删
             return "{\"name\":\"yes\"}";  //json格式
         }else { //不能删
@@ -132,7 +129,6 @@ public class CategoryManageController {
         int pageRecord = 10;
         //删除后总记录数
         int allRecord = categoryManageService.countAllCategory();
-        System.out.println(allRecord);
 
         //更新总页数
         int allPage = 0;
@@ -141,13 +137,11 @@ public class CategoryManageController {
         }else {
             allPage = allRecord / pageRecord + 1;
         }
-        System.out.println(allPage);
 
         //判断总页数和当前页数的关系，重新赋值currentPage
         if (currentPage2 >= allPage){
             currentPage2 = currentPage2 - 1;
         }
-        System.out.println(currentPage2);
 
         //重定向到分页列表原来那一页
         return "redirect:/categoryManage/findCategorys.action?currentPage=" + currentPage2;

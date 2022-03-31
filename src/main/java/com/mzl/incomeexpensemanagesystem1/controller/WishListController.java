@@ -33,8 +33,8 @@ public class WishListController {
     public String findAllWishList(HttpServletRequest request, Model model, Integer currentPage){
         //分页查询currentPage
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user.getUid());
-        System.out.println(currentPage);
+//        System.out.println(user.getUid());
+//        System.out.println(currentPage);
 
         //分页查询心愿单当前页
         PageBean<WishList> pageBean = wishListService.findAllWishList(user.getUid(), currentPage);
@@ -53,14 +53,14 @@ public class WishListController {
     @RequestMapping("/addWish.action")
     @ResponseBody
     public String addWish(WishList wishList){
-        System.out.println(wishList);
+//        System.out.println(wishList);
         //获取yyyy-MM-dd的格式时间
        String currentTime = wishList.getWdate();
        //心愿单id
        String wid = "";
        //获取某人某天的心愿单个数
         int count = wishListService.countWishListByTimeAndId(wishList);
-        System.out.println(count);
+//        System.out.println(count);
 
         count = count + 1;
 //        count += 1;
@@ -90,7 +90,7 @@ public class WishListController {
 
         //转为json格式数据
         String jsonString  = JSON.toJSONString(findWishList);
-        System.out.println("jsonString:" + jsonString);
+//        System.out.println("jsonString:" + jsonString);
 
         return jsonString;
     }
@@ -99,7 +99,7 @@ public class WishListController {
     @RequestMapping("/editWish.action")
     @ResponseBody
     public String editWish(WishList wishList){
-        System.out.println(wishList);
+//        System.out.println(wishList);
         String wid = null;
         String currentTime = wishList.getWdate();
         //获取某人，某天的心愿单个数

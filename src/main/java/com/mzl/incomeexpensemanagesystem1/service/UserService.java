@@ -3,6 +3,8 @@ package com.mzl.incomeexpensemanagesystem1.service;
 import com.mzl.incomeexpensemanagesystem1.entity.PageBean;
 import com.mzl.incomeexpensemanagesystem1.entity.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @InterfaceName :   UserService
  * @Description: TODO
@@ -35,4 +37,10 @@ public interface UserService {
 
     //进行修改用户信息
     void editUser(User user);
+
+    /**
+     * 删除(注销)用户
+     * @param request
+     */
+    void delUser(HttpServletRequest request);
 }

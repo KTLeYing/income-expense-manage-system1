@@ -53,10 +53,8 @@ public class NewsManageController {
         //查询新闻的内容，用于回显在Ueditor编辑器里
         //查询新闻的信息
         News news =  newsService.findNewsContnet(nid);
-        System.out.println("news:" + news);
         //获取新闻路径
         String nContent = news.getnContent();
-        System.out.println(nContent);
 
         //获取目标文件的根路径
 //        String string = Thread.currentThread().getContextClassLoader().getResource("").getPath();
@@ -67,7 +65,6 @@ public class NewsManageController {
 //        System.out.println(path);
         //真正的文件路径
         String realPath = nContent;
-        System.out.println("realPath:" + realPath);
 
         //读取文件内容写到stringbuffer中
         int len = 0;
@@ -86,10 +83,8 @@ public class NewsManageController {
             String line = null;
             while ((line = bufferedReader.readLine()) != null){
                 stringBuffer.append(line);
-                System.out.println(line);
                 len++;
             }
-            System.out.println(len);
 
             //关闭
             bufferedReader.close();
@@ -100,7 +95,6 @@ public class NewsManageController {
 
         //stringBUffer转为string
         String content = stringBuffer.toString();
-        System.out.println(content);
 
         //封装数据到model里，前端页面要使用
         model.addAttribute("content", content);
@@ -115,13 +109,9 @@ public class NewsManageController {
     @RequestMapping("/editNews.action")
     public String editNews(News news, Integer currentPage2, String editvalue, HttpServletRequest request){
         //拿到编辑器的原文本的内容(带有标签的格式)
-        System.out.println(news);
-        System.out.println(editvalue);
-        System.out.println(currentPage2);
 
         //获取新闻编辑器原来内容，带有标签的（editorValue是编辑器自己自带提交的一个内容值，为editorValue，不需我们设置，我们可以通过这个值来获取原带标签的内容）
         String content = request.getParameter("editorValue");
-        System.out.println(content);
 
         //把文本写入文件
         //获取文件路径
@@ -136,7 +126,6 @@ public class NewsManageController {
 
         //真正的文件路径
         String realPath = nContent;
-        System.out.println(realPath);
 
         //把内容写入，覆盖到文件中
         try {
@@ -169,13 +158,9 @@ public class NewsManageController {
     //添加新闻
     @RequestMapping("/addNews.action")
     public String addNews(News news, HttpServletRequest request, MultipartFile file, String editvalue) throws IOException {
-        System.out.println(news);
-        System.out.println(file);
-        System.out.println(editvalue);
         //判断逻辑，方式二的文件名不为空，则以方式的形式上传文件，否则，以方式一的形式上传文件
         //随机获取一个文件名
         String fileName = generateUUIDName();
-        System.out.println(fileName);
 
         //上传文件的路径
 //        String string = Thread.currentThread().getContextClassLoader().getResource("").getPath();
@@ -189,12 +174,10 @@ public class NewsManageController {
         File file2 = new File(path);
         if (!file2.exists()){
             file2.mkdir();  //创建文件夹
-            System.out.println("create dir success....");
         }
 
         //真正的路径
         String realPath = path + "\\" + fileName;
-        System.out.println(realPath);
 
         //写入数据库的文件后缀名
         String expandName = "";
@@ -202,17 +185,13 @@ public class NewsManageController {
         //方式二上传
         //上传的为空名不为空值而且不为空
         if (file.getOriginalFilename() != "" && file.getOriginalFilename() != null){
-            System.out.println("方式二：上传文件");
             //获取文件名
             String oriName = file.getOriginalFilename();
-            System.out.println(oriName);
             //获取后缀名
             String extName = oriName.substring(oriName.lastIndexOf("."));
-            System.out.println(extName);
             expandName = extName;
             //上传的文件的真正完整的路径
             realPath = realPath + extName;
-            System.out.println(realPath);
 
             //springmvc上传文件
             file.transferTo(new File(realPath));
@@ -222,7 +201,6 @@ public class NewsManageController {
             String content = request.getParameter("editorValue");
             //文件的真正最终路径
             realPath = realPath + ".txt";
-            System.out.println(realPath);
 
             //写入数据库的后缀名
             expandName = ".txt";
@@ -244,7 +222,6 @@ public class NewsManageController {
 
         //添加到数据库的文件名(带后缀名)
         String nContent = realPath;
-        System.out.println(nContent);
 
         //添加新闻到数据库
         news.setnContent(nContent);
@@ -263,7 +240,6 @@ public class NewsManageController {
     //删除新闻
     @RequestMapping("/deleteNews.action")
     public String deleteNews(Integer currentPage2, int nid){
-        System.out.println(currentPage2);
         //删除新闻
         newsService.deleteNews(nid);
 
@@ -275,7 +251,6 @@ public class NewsManageController {
         News news = new News();
         //总记录数
         int allRecord = newsService.findNewsCount(news);
-        System.out.println(news);
 
         //总页数
         int allPage = 0;
@@ -284,13 +259,11 @@ public class NewsManageController {
         }else {
             allPage = allRecord / pageRecord + 1;
         }
-        System.out.println(allPage);
 
         //处理currentPage（针对是原来最后一页，且只有一条数据）
         if (currentPage2 >= allPage){
             currentPage2 = currentPage2 - 1;   //返回最后一页的前一页
         }
-        System.out.println(currentPage2);
 
         //重定向返回到原来的那一页
         return "redirect:/newsManage/findNewsList.action?currentPage=" + currentPage2;
