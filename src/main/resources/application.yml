@@ -9,6 +9,7 @@ spring:
        prefix: /   # 相对于webapp目录
        suffix: .jsp
 
+
      #首先系统有默认配置,其中默认配置的 /** 映射到 /static （或/public、/resources、/META-INF/resources）
 #     static-path-pattern: /**
 #   resources:
@@ -62,5 +63,13 @@ mybatis:
 #      show-details: always
 #    httptrace:
 #      enabled: true
+
+management:
+  endpoints:
+    promethus:
+      enable: true
+    web:
+      exposure:
+        include: '*'
 
 

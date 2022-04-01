@@ -75,7 +75,12 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
                         "/emailCode.action",
                         "/sendMsg.action",
                         "/test/**",
-                        "/static/**"
+                        "/static/**",
+                        "/actuator/**",
+                        "/targets",
+                        "/targets/**",
+                        "/static/**",
+                        "/api/**"
                 );
 
         registry.addInterceptor(fileTypeInterceptor())
