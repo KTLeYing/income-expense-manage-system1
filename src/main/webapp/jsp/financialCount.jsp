@@ -177,7 +177,7 @@
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1"
                                                    href="${pageContext.request.contextPath}/user/delUser">
-                            <span class="glyphicon glyphicon-log-out"></span>用户注销
+                            <span class="glyphicon glyphicon-remove"></span>用户注销
                         </a> <input type="hidden" id="uid" name="uid"
                                     value="${sessionScope.user.uid }"></li>
                     </ul>
