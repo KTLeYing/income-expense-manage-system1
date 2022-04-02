@@ -34,12 +34,12 @@ public class TimeJob {
     private UserMapper userMapper;
 
     /**
-     * 每天23:59:59秒发邮件给用户，告知他们今天的消费情况
+     * 每天23:59:0秒发邮件给用户，告知他们今天的消费情况
      */
-//    @Scheduled(cron = "59 59 23 * * ?")
-    @Scheduled(cron = "0 48 21 * * ?")
+    @Scheduled(cron = "0 59 23 * * ?")
+//    @Scheduled(cron = "0 13 1 * * ?")
     public void noticeDayExpense() {
-        log.info("定时任务：每天23:59:59秒发邮件给用户，告知他们今天的消费情况...");
+        log.info("定时任务：每天23:59:0秒发邮件给用户，告知他们今天的消费情况...");
         //先查询所有用户
         List<User> userRecordVoList = userMapper.selectAllUser();
         System.out.println("用户：" + userRecordVoList);
@@ -84,8 +84,8 @@ public class TimeJob {
     /**
      * 每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况
      */
-//    @Scheduled(cron = "0 0 6 * * ?")
-    @Scheduled(cron = "0 48 21 * * ?")
+    @Scheduled(cron = "0 0 6 1 * ?")
+//    @Scheduled(cron = "0 13 1 * * ?")
     public void noticeMonthExpense() {
         log.info("定时任务：每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况...");
         //先查询所有用户
@@ -138,12 +138,12 @@ public class TimeJob {
     }
 
     /**
-     * 每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况
+     * 每年1月1号凌晨3点会发邮件给用户，告知他们上一年的消费情况
      */
-//    @Scheduled(cron = "0 0 6 1 1 ?")
-    @Scheduled(cron = "0 48 21 * * ?")
+    @Scheduled(cron = "0 0 3 1 1 ?")
+//    @Scheduled(cron = "0 13 1 * * ?")
     public void noticeYearExpense() {
-        log.info("定时任务：每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况...");
+        log.info("定时任务：每年1月1号凌晨3点会发邮件给用户，告知他们上一年的消费情况...");
         //先查询所有用户
         List<User> userRecordVoList = userMapper.selectAllUser();
         System.out.println("用户：" + userRecordVoList);
@@ -194,19 +194,19 @@ public class TimeJob {
     }
 
     /**
-     * 每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况
+     * 每天10点会发邮件给用户，告知他们记得记录今天的消费情况
      */
-//    @Scheduled(cron = "0 0 10 1 * ?")
-    @Scheduled(cron = "0 48 21 * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")
+//    @Scheduled(cron = "0 13 1 * * ?")
     public void noticeUserToRecord() {
-        log.info("定时任务：每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况...");
+        log.info("定时任务：每天10点会发邮件给用户，告知他们记得记录今天的消费情况...");
         //先查询所有用户
         List<User> userRecordVoList = userMapper.selectAllUser();
         System.out.println("用户：" + userRecordVoList);
         userRecordVoList.forEach(userRecordVo -> {
 
             //构造发送邮件的信息
-            String htmlMessage = "<h3 style='color: red;'>智能收支管理平台-用户今天收支情况</h3><br/>" +
+            String htmlMessage = "<h3 style='color: red;'>智能收支管理平台-温馨提示</h3><br/>" +
                     userRecordVo.getUsername() + "&nbsp;您好！<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天也要记得和智能收支管理平台交流噢！<br/>" +
                     "&nbsp;&nbsp;&nbsp;智能收支管理平台智能消费更理智！<br/>" +
@@ -227,17 +227,22 @@ public class TimeJob {
     }
 
     /**
-     * 发送邮件异步任务
+     * 发送邮件异步任务，进行synchronized加同步锁，因为定时任务是异步的，会同时执行这个方法资源，即可能会同时请求去连接qq服务器，
+     * 最后会出现同时连接服务器双方不相让的请求，最后导致连接QQ邮箱服务器失败和崩溃，最后第三方连接QQ服务器连接中断和崩溃掉了
      * @param
      * @param message
      */
-    @Async("sendEmailTaskExecutor")
-    public void sendEmail(String email, String message) throws IOException, MessagingException {
+//    @Async("sendEmailTaskExecutor")
+    public synchronized void sendEmail(String email, String message) throws IOException, MessagingException {
         EmailCodeUtil emailCodeUtil = new EmailCodeUtil();
         //避免邮件服务器崩溃，只能同步了
         emailCodeUtil.sendSettingEmail(email, message);
-
-
+        //每发一条休息10s, 因为qq邮箱授权码一分钟发送数量有限制
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -32,7 +32,7 @@ public class EmailCodeUtil {
     //发件人的邮箱，你自己的
     private String emailFrom = "2198902814@qq.com";
   // 发件人的授权码
-  private String emailPassword = "uwippiqqyxeqeaie";
+  private String emailPassword = "fyorfucxegkedjgh";
     //发送邮件服务地址
     private String emailSMTPHost = "smtp.qq.com";
     //收件人的邮箱
