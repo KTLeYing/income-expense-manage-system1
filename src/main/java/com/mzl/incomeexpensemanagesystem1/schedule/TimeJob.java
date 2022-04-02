@@ -37,7 +37,7 @@ public class TimeJob {
      * 每天23:59:59秒发邮件给用户，告知他们今天的消费情况
      */
 //    @Scheduled(cron = "59 59 23 * * ?")
-    @Scheduled(cron = "0 31 21 * * ?")
+    @Scheduled(cron = "0 48 21 * * ?")
     public void noticeDayExpense() {
         log.info("定时任务：每天23:59:59秒发邮件给用户，告知他们今天的消费情况...");
         //先查询所有用户
@@ -85,7 +85,7 @@ public class TimeJob {
      * 每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况
      */
 //    @Scheduled(cron = "0 0 6 * * ?")
-    @Scheduled(cron = "0 31 21 * * ?")
+    @Scheduled(cron = "0 48 21 * * ?")
     public void noticeMonthExpense() {
         log.info("定时任务：每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况...");
         //先查询所有用户
@@ -119,7 +119,7 @@ public class TimeJob {
 
             //构造发送邮件的信息
             String htmlMessage = "<h3 style='color: red;'>智能收支管理平台-用户月收支情况</h3><br/>" +
-                    userRecordVo.getUsername() + "&nbsp;您好！您"+ "2020-04" + "月的收支情况如下：<br/>" +
+                    userRecordVo.getUsername() + "&nbsp;您好！您"+ thisMonth + "月的收支情况如下：<br/>" +
                     "&nbsp;&nbsp;&nbsp;月总收入金额: " + incomeNum + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;月总支出金额: " + expenseNum  + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;月总金额(净收入): " + totalNum + "<br/>"   +
@@ -141,7 +141,7 @@ public class TimeJob {
      * 每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况
      */
 //    @Scheduled(cron = "0 0 6 1 1 ?")
-    @Scheduled(cron = "0 31 21 * * ?")
+    @Scheduled(cron = "0 48 21 * * ?")
     public void noticeYearExpense() {
         log.info("定时任务：每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况...");
         //先查询所有用户
@@ -197,7 +197,7 @@ public class TimeJob {
      * 每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况
      */
 //    @Scheduled(cron = "0 0 10 1 * ?")
-    @Scheduled(cron = "0 31 21 * * ?")
+    @Scheduled(cron = "0 48 21 * * ?")
     public void noticeUserToRecord() {
         log.info("定时任务：每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况...");
         //先查询所有用户
