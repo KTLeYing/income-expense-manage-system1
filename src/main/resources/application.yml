@@ -18,7 +18,7 @@ spring:
    # 激活环境
    profiles:
      active: dev
-   # 已激活: pro
+#     active: pro
    servlet:
        multipart:
          #单个文件上传大小
