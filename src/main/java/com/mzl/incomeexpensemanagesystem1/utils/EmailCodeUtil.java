@@ -31,8 +31,8 @@ public class EmailCodeUtil {
 
     //发件人的邮箱，你自己的
     private String emailFrom = "2198902814@qq.com";
-    //发件人的授权码
-    private String emailPassword = "jrbqchuoppzaecdg";
+  // 发件人的授权码
+  private String emailPassword = "lkxqdihymksbdjbg";
     //发送邮件服务地址
     private String emailSMTPHost = "smtp.qq.com";
     //收件人的邮箱
@@ -40,7 +40,7 @@ public class EmailCodeUtil {
 
 
     //发送邮件对象，发送创建好的邮件内容
-    public String sendEmail(String emailTo) throws IOException, MessagingException {
+    public synchronized String sendEmail(String emailTo) throws IOException, MessagingException {
         //赋值收件人的邮箱
         this.emailTo = emailTo;
         //创建配置参数，用于连接邮件服务器的参数配置
@@ -106,7 +106,7 @@ public class EmailCodeUtil {
      * @throws IOException
      * @throws MessagingException
      */
-    public String sendSettingEmail(String emailTo, String htmlContent) throws IOException, MessagingException {
+    public synchronized void sendSettingEmail(String emailTo, String htmlContent) throws IOException, MessagingException {
         //赋值收件人的邮箱
         this.emailTo = emailTo;
         //创建配置参数，用于连接邮件服务器的参数配置
@@ -144,8 +144,8 @@ public class EmailCodeUtil {
         session.setDebug(true);
 
         //s随机获位验证码
-        String code = RandomUtil.getRandom();
-        System.out.println("邮件验证码为：" + code);
+//        String code = RandomUtil.getRandom();
+//        System.out.println("邮件验证码为：" + code);
         //创建HTML个式发送的邮件内容
 //        String htmlContent = HtmlTextUtil.htmlContent(code);
         System.out.println(htmlContent);
@@ -162,7 +162,7 @@ public class EmailCodeUtil {
         transport.close();
 
         //返回内部真正的邮箱验证码
-        return code;
+//        return code;
     }
 
     //创建邮件对象，处理邮件的内容

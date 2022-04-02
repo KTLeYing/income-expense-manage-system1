@@ -36,16 +36,18 @@ public class TimeJob {
     /**
      * 每天23:59:59秒发邮件给用户，告知他们今天的消费情况
      */
-    @Scheduled(cron = "59 59 23 * * ?")
+//    @Scheduled(cron = "59 59 23 * * ?")
+    @Scheduled(cron = "0 31 21 * * ?")
     public void noticeDayExpense() {
         log.info("定时任务：每天23:59:59秒发邮件给用户，告知他们今天的消费情况...");
         //先查询所有用户
-        List<UserRecordVo> UserRecordVoList = userMapper.selectAllUser();
+        List<User> userRecordVoList = userMapper.selectAllUser();
+        System.out.println("用户：" + userRecordVoList);
         //获取今天日期
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String today = simpleDateFormat.format(date);
-        UserRecordVoList.forEach(userRecordVo -> {
+        userRecordVoList.forEach(userRecordVo -> {
             //查询当前用户的当天的收入
             Integer incomeNum = userMapper.countIncome(userRecordVo.getUid(), today);
             if(incomeNum == null){
@@ -65,7 +67,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;今天总收入金额: " + incomeNum + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天总支出金额: " + expenseNum  + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天总金额(净收入): " + totalNum + "<br/>"   +
-                    "智能收支管理平台陪伴你每一天！祝你明天生活愉快鸭！<br/><br/>";
+                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快鸭！<br/><br/>";
 
             //开启一个线程发送邮件
             try {
@@ -82,11 +84,13 @@ public class TimeJob {
     /**
      * 每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况
      */
-    @Scheduled(cron = "0 0 6 * * ?")
+//    @Scheduled(cron = "0 0 6 * * ?")
+    @Scheduled(cron = "0 31 21 * * ?")
     public void noticeMonthExpense() {
         log.info("定时任务：每个月1号早上6点会发邮件给用户，告知他们上个月的消费情况...");
         //先查询所有用户
-        List<UserRecordVo> UserRecordVoList = userMapper.selectAllUser();
+        List<User> userRecordVoList = userMapper.selectAllUser();
+        System.out.println("用户：" + userRecordVoList);
         //获取今天日期
         Date date = new Date();
         //创建日历对象
@@ -99,7 +103,7 @@ public class TimeJob {
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM");
         String thisMonth = simpleDateFormat1.format(now1);
 
-        UserRecordVoList.forEach(userRecordVo -> {
+        userRecordVoList.forEach(userRecordVo -> {
             //查询当前用户的本月的收入
             Integer incomeNum = userMapper.countMonthIncome(userRecordVo.getUid(), thisMonth);
             if(incomeNum == null){
@@ -119,7 +123,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;月总收入金额: " + incomeNum + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;月总支出金额: " + expenseNum  + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;月总金额(净收入): " + totalNum + "<br/>"   +
-                    "智能收支管理平台陪伴你每一天！祝您每天生活愉快！<br/><br/>";
+                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
 
             //开启一个线程发送邮件
             try {
@@ -136,11 +140,13 @@ public class TimeJob {
     /**
      * 每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况
      */
-    @Scheduled(cron = "0 0 6 1 1 ?")
+//    @Scheduled(cron = "0 0 6 1 1 ?")
+    @Scheduled(cron = "0 31 21 * * ?")
     public void noticeYearExpense() {
         log.info("定时任务：每年1月1号早上6点会发邮件给用户，告知他们上一年的消费情况...");
         //先查询所有用户
-        List<UserRecordVo> UserRecordVoList = userMapper.selectAllUser();
+        List<User> userRecordVoList = userMapper.selectAllUser();
+        System.out.println("用户：" + userRecordVoList);
         //获取今天日期
         Date date = new Date();
         //创建日历对象
@@ -153,7 +159,7 @@ public class TimeJob {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         String thisYear = simpleDateFormat.format(now1);
 
-        UserRecordVoList.forEach(userRecordVo -> {
+        userRecordVoList.forEach(userRecordVo -> {
             //查询当前用户的本年的收入
             Integer incomeNum = userMapper.countYearIncome(userRecordVo.getUid(), thisYear);
             if(incomeNum == null){
@@ -173,7 +179,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;年总收入金额: " + incomeNum + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;年总支出金额: " + expenseNum  + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;年总金额(净收入): " + totalNum + "<br/>"   +
-                    "智能收支管理平台陪伴你每一天！祝您每天生活愉快！<br/><br/>";
+                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
 
             //开启一个线程发送邮件
             try {
@@ -190,12 +196,14 @@ public class TimeJob {
     /**
      * 每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况
      */
-    @Scheduled(cron = "0 0 10 1 * ?")
+//    @Scheduled(cron = "0 0 10 1 * ?")
+    @Scheduled(cron = "0 31 21 * * ?")
     public void noticeUserToRecord() {
         log.info("定时任务：每天1号10点会发邮件给用户，告知他们记得记录今天的消费情况...");
         //先查询所有用户
-        List<UserRecordVo> UserRecordVoList = userMapper.selectAllUser();
-        UserRecordVoList.forEach(userRecordVo -> {
+        List<User> userRecordVoList = userMapper.selectAllUser();
+        System.out.println("用户：" + userRecordVoList);
+        userRecordVoList.forEach(userRecordVo -> {
 
             //构造发送邮件的信息
             String htmlMessage = "<h3 style='color: red;'>智能收支管理平台-用户今天收支情况</h3><br/>" +
@@ -204,7 +212,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;智能收支管理平台智能消费更理智！<br/>" +
                     "&nbsp;&nbsp;&nbsp;赶紧登录智能收支管理平台记录今天的个人收支情况鸭鸭~<br/>" +
                     "&nbsp;&nbsp;&nbsp;登录地址：http://localhost:9999/incomeExpense<br/>" +
-                    "智能收支管理平台陪伴你每一天！祝您每天生活愉快！<br/><br/>";
+                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
 
             //开启一个线程发送邮件
             try {
@@ -226,7 +234,10 @@ public class TimeJob {
     @Async("sendEmailTaskExecutor")
     public void sendEmail(String email, String message) throws IOException, MessagingException {
         EmailCodeUtil emailCodeUtil = new EmailCodeUtil();
+        //避免邮件服务器崩溃，只能同步了
         emailCodeUtil.sendSettingEmail(email, message);
+
+
     }
 
 

@@ -53,7 +53,7 @@ public interface UserMapper {
      * 先查询所有用户
      * @return
      */
-    List<UserRecordVo> selectAllUser();
+    List<User> selectAllUser();
 
     /**
      * 查询当前用户的当天的收入

@@ -64,7 +64,7 @@
     </select>
 
     <!--先查询所有用户-->
-    <select id="selectAllUser" resultType="com.mzl.incomeexpensemanagesystem1.vo.UserRecordVo">
+    <select id="selectAllUser" resultType="com.mzl.incomeexpensemanagesystem1.entity.User">
         select * from user;
     </select>
 
