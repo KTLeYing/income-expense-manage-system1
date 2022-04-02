@@ -161,6 +161,24 @@
                             href="${pageContext.request.contextPath}/newsManage/findNewsList.action">
                         <span class="glyphicon glyphicon-folder-open"></span> 理财新闻管理
                     </a></li>
+                    <li>
+                        <a href="http://localhost:3000"  target="_blank">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                            系统性能监控
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:9090/targets" target="_blank">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                            Prometheus监控
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8889/admin/" target="_blank">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                            Nginx监控
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

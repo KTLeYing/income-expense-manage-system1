@@ -22,11 +22,11 @@ public class ThreadPoolConfig {
 
     //TODO:java config的方式显示注入Bean
     /**
-     * 任务-线程池-调度配置
+     * 任务-线程池-调度配置(发送邮件)
      * @return
      */
-    @Bean("taskExecutor")
-    public Executor taskExecutor(){
+    @Bean("sendEmailTaskExecutor")
+    public Executor sendEmailTaskExecutor(){
         ThreadPoolTaskExecutor executor=new ThreadPoolTaskExecutor();
         //核心线程数
         executor.setCorePoolSize(300);

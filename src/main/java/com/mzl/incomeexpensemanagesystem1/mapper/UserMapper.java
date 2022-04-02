@@ -1,6 +1,7 @@
 package com.mzl.incomeexpensemanagesystem1.mapper;
 
 import com.mzl.incomeexpensemanagesystem1.entity.User;
+import com.mzl.incomeexpensemanagesystem1.vo.UserRecordVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -47,4 +48,59 @@ public interface UserMapper {
      * @param uid
      */
     void delUser(int uid);
+
+    /**
+     * 先查询所有用户
+     * @return
+     */
+    List<UserRecordVo> selectAllUser();
+
+    /**
+     * 查询当前用户的当天的收入
+     * @param uid
+     * @param today
+     * @return
+     */
+    Integer countIncome(int uid, String today);
+
+    /**
+     * 查询当前用户的当天的支出
+     * @param uid
+     * @param today
+     * @return
+     */
+    Integer countExpense(int uid, String today);
+
+    /**
+     * 查询当前用户的本月的收入
+     * @param uid
+     * @param thisMonth
+     * @return
+     */
+    Integer countMonthIncome(int uid, String thisMonth);
+
+    /**
+     * 查询当前用户的本月的支出
+     * @param uid
+     * @param thisMonth
+     * @return
+     */
+    Integer countMonthExpense(int uid, String thisMonth);
+
+    /**
+     * 查询当前用户的本年的收入
+     * @param uid
+     * @param thisYear
+     * @return
+     */
+    Integer countYearIncome(int uid, String thisYear);
+
+    /**
+     * 查询当前用户的本年的支出
+     * @param uid
+     * @param thisYear
+     * @return
+     */
+    Integer countYearExpense(int uid, String thisYear);
+
 }

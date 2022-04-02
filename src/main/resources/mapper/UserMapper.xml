@@ -63,6 +63,41 @@
         where uid = #{uid}
     </select>
 
+    <!--先查询所有用户-->
+    <select id="selectAllUser" resultType="com.mzl.incomeexpensemanagesystem1.vo.UserRecordVo">
+        select * from user;
+    </select>
+
+    <!--查询当前用户的当天的收入-->
+    <select id="countIncome" resultType="java.lang.Integer">
+        SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num > 0 and szr_date = #{today};
+    </select>
+
+    <!--查询当前用户的当天的支出-->
+    <select id="countExpense" resultType="java.lang.Integer">
+        SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num &lt; 0 and szr_date = #{today};
+    </select>
+
+    <!--查询当前用户的本月的收入-->
+    <select id="countMonthIncome" resultType="java.lang.Integer">
+        SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num > 0 and DATE_FORMAT(szr_date, '%Y-%m') = #{thisMonth};
+    </select>
+
+    <!--查询当前用户的本月的支出-->
+    <select id="countMonthExpense" resultType="java.lang.Integer">
+        SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num &lt; 0 and DATE_FORMAT(szr_date, '%Y-%m') = #{thisMonth};
+    </select>
+
+    <!--查询当前用户的本年的收入-->
+    <select id="countYearIncome" resultType="java.lang.Integer">
+       SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num > 0 and DATE_FORMAT(szr_date, '%Y') = #{thisYear};
+    </select>
+
+    <!--查询当前用户的本年的收入-->
+    <select id="countYearExpense" resultType="java.lang.Integer">
+       SELECT sum(sr.szr_num) from user u, shouzhi_record sr WHERE u.uid = #{uid} and u.uid = sr.user_id and sr.szr_num &lt; 0 and DATE_FORMAT(szr_date, '%Y') = #{thisYear};
+    </select>
+
     <!--用户注册-->
     <insert id="insertUser">
         <!-- 自增主键返回 -->
