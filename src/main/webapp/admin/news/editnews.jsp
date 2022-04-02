@@ -149,19 +149,19 @@
                     </a></li>
                     <li>
                         <a href="http://localhost:3000"  target="_blank">
-                            <span class="glyphicon glyphicon-folder-open"></span>
+                            <span class="glyphicon glyphicon-dashboard"></span>
                             系统性能监控
                         </a>
                     </li>
                     <li>
                         <a href="http://localhost:9090/targets" target="_blank">
-                            <span class="glyphicon glyphicon-folder-open"></span>
+                            <span class="glyphicon glyphicon-record"></span>
                             Prometheus监控
                         </a>
                     </li>
                     <li>
                         <a href="http://localhost:8889/admin/" target="_blank">
-                            <span class="glyphicon glyphicon-folder-open"></span>
+                            <span class="glyphicon glyphicon-globe"></span>
                             Nginx监控
                         </a>
                     </li>
