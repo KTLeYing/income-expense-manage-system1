@@ -197,7 +197,7 @@ public class TimeJob {
      * 每天10点会发邮件给用户，告知他们记得记录今天的消费情况
      */
     @Scheduled(cron = "0 0 10 * * ?")
-//    @Scheduled(cron = "0 13 1 * * ?")
+//    @Scheduled(cron = "0 09 10 * * ?")
     public void noticeUserToRecord() {
         log.info("定时任务：每天10点会发邮件给用户，告知他们记得记录今天的消费情况...");
         //先查询所有用户
@@ -251,27 +251,27 @@ public class TimeJob {
       SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
       //获取今天日期
       Date date = simpleDateFormat1.parse("2022-01-01");
-//      //创建日历对象
-//      Calendar cal = Calendar.getInstance();
-//      //将时间日期数据传入日历对象
-//      cal.setTime(date);
-//      //设置天数减10（保证上个月）
-//      cal.add(Calendar.DAY_OF_MONTH, -10);
-//      Date now1 = cal.getTime();
-//      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
-//      String thisMonth = simpleDateFormat.format(now1);
-//      System.out.println(thisMonth);
-
       //创建日历对象
       Calendar cal = Calendar.getInstance();
       //将时间日期数据传入日历对象
       cal.setTime(date);
-      //设置天数减10（保证上一年）
+      //设置天数减10（保证上个月）
       cal.add(Calendar.DAY_OF_MONTH, -10);
       Date now1 = cal.getTime();
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
-      String thisYear = simpleDateFormat.format(now1);
-      System.out.println(thisYear);
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+      String thisMonth = simpleDateFormat.format(now1);
+      System.out.println(thisMonth);
+
+      //创建日历对象
+//      Calendar cal = Calendar.getInstance();
+//      //将时间日期数据传入日历对象
+//      cal.setTime(date);
+//      //设置天数减10（保证上一年）
+//      cal.add(Calendar.DAY_OF_MONTH, -10);
+//      Date now1 = cal.getTime();
+//      SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+//      String thisYear = simpleDateFormat.format(now1);
+//      System.out.println(thisYear);
   }
 
 }
