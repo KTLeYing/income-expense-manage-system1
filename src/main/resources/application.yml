@@ -6,53 +6,53 @@ server:
 spring:
    mvc:
      view:
-       prefix: /   # Ïà¶ÔÓÚwebappÄ¿Â¼
+       prefix: /   # ï¿½ï¿½ï¿½ï¿½ï¿½webappÄ¿Â¼
        suffix: .jsp
 
 
-     #Ê×ÏÈÏµÍ³ÓĞÄ¬ÈÏÅäÖÃ,ÆäÖĞÄ¬ÈÏÅäÖÃµÄ /** Ó³Éäµ½ /static £¨»ò/public¡¢/resources¡¢/META-INF/resources£©
+     #ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ /** Ó³ï¿½äµ½ /static ï¿½ï¿½ï¿½ï¿½/publicï¿½ï¿½/resourcesï¿½ï¿½/META-INF/resourcesï¿½ï¿½
 #     static-path-pattern: /**
 #   resources:
 #     static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
 
-   # ¼¤»î»·¾³
+   # ï¿½ï¿½ï¿½î»·ï¿½ï¿½
    profiles:
      active: dev
 #     active: pro
    servlet:
        multipart:
-         #µ¥¸öÎÄ¼şÉÏ´«´óĞ¡
+         #ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½ï¿½Ğ¡
          max-file-size: 10MB
-         #×ÜÊı¾İÉÏ´«´óĞ¡
+         #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½Ğ¡
          max-request-size: 100MB
 
-   #¿ªÆôÈÈ²¿Êğ
+   #ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
    devtools:
       restart:
         enabled: true
 
-#mybatisÅäÖÃ
+#mybatisï¿½ï¿½ï¿½ï¿½
 mybatis:
-  #ÅäÖÃSQLÓ³ÉäÎÄ¼şÂ·¾¶
+  #ï¿½ï¿½ï¿½ï¿½SQLÓ³ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
   mapper-locations: classpath:mapper/*.xml
-  #ÅäÖÃ±ğÃû
+  #ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½
   type-aliases-package: com.mzl.incomeexpensemanagesystem1.entity
-  #ÍÕ·åÃüÃû
+  #ï¿½Õ·ï¿½ï¿½ï¿½ï¿½ï¿½
   configuration:
     map-underscore-to-camel-case: false
 
-#   # ÔÊĞíÑ­»·ÒÀÀµ
+#   # ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #   main:
 #     allow-circular-references: true
 #
-#   # Í³ĞÔÄÜ¼à¿Ø¿ÉÊÓ»¯½çÃæµÄ¿Í»§¶Ë£¬½«Client×÷Îª·şÎñ×¢²áµ½Server£¬Í¨¹ıServerÀ´¼àÌıÏîÄ¿µÄÔËĞĞÇé¿ö¡¾spring-boot-admin-client¡¿
+#   # Í³ï¿½ï¿½ï¿½Ü¼ï¿½Ø¿ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Í»ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Clientï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½×¢ï¿½áµ½Serverï¿½ï¿½Í¨ï¿½ï¿½Serverï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½spring-boot-admin-clientï¿½ï¿½
 #   boot:
 #     admin:
 #       client:
 #         enabled: true
-#         url: http://localhost:9999/incomeExpense  # ÏîÄ¿ÇëÇó»ù´¡(¸ù)Â·¾¶
+#         url: http://localhost:9999/incomeExpense  # ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)Â·ï¿½ï¿½
 #
-## Í³ĞÔÄÜ¼à¿Ø¼à¿Ø£¬Í¨¹ıÏÂÃæµÄÅäÖÃÆôÓÃËùÓĞµÄ¼à¿Ø¶Ëµã£¬Ä¬ÈÏÇé¿öÏÂ£¬ÕâĞ©¶ËµãÊÇ½ûÓÃµÄ£»¡¾spring-boot-admin-client¡¿
+## Í³ï¿½ï¿½ï¿½Ü¼ï¿½Ø¼ï¿½Ø£ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ¼ï¿½Ø¶Ëµã£¬Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Ğ©ï¿½Ëµï¿½ï¿½Ç½ï¿½ï¿½ÃµÄ£ï¿½ï¿½ï¿½spring-boot-admin-clientï¿½ï¿½
 #management:
 #  endpoints:
 #    web:

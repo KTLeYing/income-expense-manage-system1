@@ -67,7 +67,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;今天总收入金额: " + incomeNum + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天总支出金额: " + expenseNum  + "<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天总金额(净收入): " + totalNum + "<br/>"   +
-                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快鸭！<br/><br/>";
+                    "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
 
             //开启一个线程发送邮件
             try {
@@ -209,7 +209,7 @@ public class TimeJob {
             String htmlMessage = "<h3 style='color: red;'>智能收支管理平台-温馨提示</h3><br/>" +
                     userRecordVo.getUsername() + "&nbsp;您好！<br/>" +
                     "&nbsp;&nbsp;&nbsp;今天也要记得和智能收支管理平台交流噢！<br/>" +
-                    "&nbsp;&nbsp;&nbsp;智能收支管理平台智能消费更理智！<br/>" +
+                    "&nbsp;&nbsp;&nbsp;智能收支管理平台助你消费更理智！<br/>" +
                     "&nbsp;&nbsp;&nbsp;赶紧登录智能收支管理平台记录今天的个人收支情况鸭鸭~<br/>" +
                     "&nbsp;&nbsp;&nbsp;登录地址：http://localhost:9999/incomeExpense<br/>" +
                     "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
@@ -227,8 +227,8 @@ public class TimeJob {
     }
 
     /**
-     * 发送邮件异步任务，进行synchronized加同步锁，因为定时任务是异步的，会同时执行这个方法资源，即可能会同时请求去连接qq服务器，
-     * 最后会出现同时连接服务器双方不相让的请求，最后导致连接QQ邮箱服务器失败和崩溃，最后第三方连接QQ服务器连接中断和崩溃掉了
+     * 发送邮件异步任务，进行synchronized加同步锁，并每个发送完休息10s，因为定时任务是异步的，会同时执行这个方法资源，即可能会同时请求去连接qq服务器，
+     * 即请求速率(QPS)过大，最终会导致QQ服务器宕机，最后导致连接QQ邮箱服务器失败和崩溃，最后第三方连接QQ服务器连接中断和崩溃掉了
      * @param
      * @param message
      */
