@@ -197,7 +197,7 @@ public class TimeJob {
      * 每天10点会发邮件给用户，告知他们记得记录今天的消费情况
      */
     @Scheduled(cron = "0 0 10 * * ?")
-//    @Scheduled(cron = "0 09 10 * * ?")
+//    @Scheduled(cron = "0 13 11 * * ?")
     public void noticeUserToRecord() {
         log.info("定时任务：每天10点会发邮件给用户，告知他们记得记录今天的消费情况...");
         //先查询所有用户
