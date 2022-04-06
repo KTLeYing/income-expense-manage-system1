@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80019
 File Encoding         : 65001
 
-Date: 2022-04-01 21:28:36
+Date: 2022-04-06 11:06:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,15 +44,15 @@ CREATE TABLE `budget` (
   PRIMARY KEY (`wid`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `budget_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of budget
 -- ----------------------------
 INSERT INTO `budget` VALUES ('3', '2020-07', '16000', '1');
-INSERT INTO `budget` VALUES ('4', '2020-07', '6000', '17');
 INSERT INTO `budget` VALUES ('5', '2021-03', '500', '1');
 INSERT INTO `budget` VALUES ('6', '2022-03', '5000', '1');
+INSERT INTO `budget` VALUES ('7', '2022-04', '5000', '1');
 
 -- ----------------------------
 -- Table structure for memorandum
@@ -67,7 +67,7 @@ CREATE TABLE `memorandum` (
   PRIMARY KEY (`mid`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `memorandum_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of memorandum
@@ -89,7 +89,8 @@ INSERT INTO `memorandum` VALUES ('22', '2021-04-10', 'D:\\Program Files\\MyFiles
 INSERT INTO `memorandum` VALUES ('23', '2021-04-10', 'D:/Program Files/MyFilesPractice(own)/memorandum\\b264647e-456f-42bb-9cc2-adf322a91350.txt', '5555\r\n', '1');
 INSERT INTO `memorandum` VALUES ('24', '2021-04-10', 'D:\\Program Files\\MyFilesPractice(own)\\memorandum/c620c077-97d2-46b6-b0a3-c082f264cc19.txt', '888\r\n', '1');
 INSERT INTO `memorandum` VALUES ('25', '2021-04-10', 'D:/Program Files/MyFilesPractice(own)/memorandum/84c5a862-a6d9-4902-8d1f-1446c88a81a0.txt', 'ttt\r\n', '1');
-INSERT INTO `memorandum` VALUES ('26', '2021-04-10', 'D:/Program Files/MyFilesPractice(own)/memorandum/a45cd218-ec39-4abc-b56b-c83104f316be.txt', 'rrrrt\r\n', '1');
+INSERT INTO `memorandum` VALUES ('26', '2021-04-10', 'D:/Program Files/MyFilesPractice(own)/memorandum/a45cd218-ec39-4abc-b56b-c83104f316be.txt', 'rrrrt哈哈哈哈\r\n', '1');
+INSERT INTO `memorandum` VALUES ('27', '2022-04-03', 'D:/Program Files/MyFilesPractice(own)/memorandum/42721bb8-993b-4e78-942f-e8ca468cfbd1.txt', '加油\r\n', '1');
 
 -- ----------------------------
 -- Table structure for news
@@ -175,23 +176,22 @@ CREATE TABLE `shouzhi_record` (
 -- ----------------------------
 -- Records of shouzhi_record
 -- ----------------------------
-INSERT INTO `shouzhi_record` VALUES ('1', '-80', '2020-05-21', '早餐', '3', '1');
-INSERT INTO `shouzhi_record` VALUES ('3', '1000', '2022-01-05', '大三校奖学金', '2', '1');
-INSERT INTO `shouzhi_record` VALUES ('34', '-20', '2022-02-14', '买水果', '3', '1');
+INSERT INTO `shouzhi_record` VALUES ('1', '-80', '2022-04-03', '早餐', '3', '1');
+INSERT INTO `shouzhi_record` VALUES ('3', '1000', '2022-03-05', '大三校奖学金', '2', '1');
+INSERT INTO `shouzhi_record` VALUES ('34', '-20', '2022-04-03', '买水果', '3', '1');
 INSERT INTO `shouzhi_record` VALUES ('35', '5000', '2022-01-03', '国家励志奖学金(大三)', '1', '1');
-INSERT INTO `shouzhi_record` VALUES ('38', '-1700', '2022-02-09', '2022.2房租', '44', '1');
+INSERT INTO `shouzhi_record` VALUES ('38', '-1700', '2022-03-08', '2022.2房租', '44', '1');
 INSERT INTO `shouzhi_record` VALUES ('39', '-700', '2022-01-12', '护肤品', '13', '1');
 INSERT INTO `shouzhi_record` VALUES ('40', '9000', '2020-07-03', '月工资', '1', '1');
 INSERT INTO `shouzhi_record` VALUES ('41', '800', '2020-07-05', '互联网+比赛', '8', '1');
-INSERT INTO `shouzhi_record` VALUES ('42', '1000', '2021-01-08', '校奖学金(大二)', '2', '1');
-INSERT INTO `shouzhi_record` VALUES ('43', '1000', '2022-03-04', '软件应用与开发国奖奖金', '4', '1');
-INSERT INTO `shouzhi_record` VALUES ('44', '-8000', '2020-02-10', '捐款', '13', '1');
-INSERT INTO `shouzhi_record` VALUES ('45', '1000', '2020-11-25', '大二上学期实习工资', '1', '1');
+INSERT INTO `shouzhi_record` VALUES ('42', '1000', '2022-03-16', '校奖学金(大二)', '2', '1');
+INSERT INTO `shouzhi_record` VALUES ('43', '1000', '2021-03-04', '软件应用与开发国奖奖金', '4', '1');
+INSERT INTO `shouzhi_record` VALUES ('44', '-8000', '2021-02-10', '捐款', '13', '1');
+INSERT INTO `shouzhi_record` VALUES ('45', '1000', '2022-04-03', '大二上学期实习工资', '1', '1');
 INSERT INTO `shouzhi_record` VALUES ('46', '-300', '2022-03-16', '疫情捐款', '41', '1');
-INSERT INTO `shouzhi_record` VALUES ('47', '1000', '2020-07-10', '互联网+比赛', '2', '17');
 INSERT INTO `shouzhi_record` VALUES ('48', '2000', '2021-03-10', '学费', '2', '24');
 INSERT INTO `shouzhi_record` VALUES ('49', '2000', '2021-04-10', '学费', '1', '1');
-INSERT INTO `shouzhi_record` VALUES ('50', '-50', '2021-04-07', '淘宝买Java书', '5', '1');
+INSERT INTO `shouzhi_record` VALUES ('50', '-50', '2021-04-07', '淘宝买Java书', '5', '24');
 INSERT INTO `shouzhi_record` VALUES ('51', '7000', '2022-02-23', '2022.2工资', '1', '1');
 INSERT INTO `shouzhi_record` VALUES ('52', '400', '2022-03-31', '这个月的工资', '1', '27');
 INSERT INTO `shouzhi_record` VALUES ('53', '-1000', '2022-03-15', '今天的伙食', '11', '27');
@@ -208,22 +208,23 @@ CREATE TABLE `user` (
   `email` varchar(30) DEFAULT NULL,
   `phone` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'lisi', '562d25f64e7491353ba59f39457c8a40b991b34d5443d04d', '男', '2198762451@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('1', 'lisi', '562d25f64e7491353ba59f39457c8a40b991b34d5443d04d', '男', '2198902814@qq.com', '13652707142');
 INSERT INTO `user` VALUES ('3', 'mazhenle', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
-INSERT INTO `user` VALUES ('17', 'LiuWei', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198762451@qq.com', '13675898878');
 INSERT INTO `user` VALUES ('18', 'wangxi', '41898692308e955f1c253f6892095950047ae9f97602ba71', '女', '2198902814@qq.com', '13675489891');
 INSERT INTO `user` VALUES ('19', 'lili', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13675489891');
-INSERT INTO `user` VALUES ('21', 'liurui', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13675489891');
-INSERT INTO `user` VALUES ('23', 'lyz', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2374989790@qq.com', '13423589319');
 INSERT INTO `user` VALUES ('24', 'limi', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
-INSERT INTO `user` VALUES ('25', 'lile', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
-INSERT INTO `user` VALUES ('27', 'liwu', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
-INSERT INTO `user` VALUES ('28', 'lilu', '41898692308e955f1c253f6892095950047ae9f97602ba71', '女', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('27', 'liwu', '795713a0c988d5a204044a1a05188e06a64e526559521b76', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('29', 'liw1', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('30', 'liw2', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('31', 'liw3', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('32', 'liw4', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('33', 'liw5', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
+INSERT INTO `user` VALUES ('34', 'liw6', '41898692308e955f1c253f6892095950047ae9f97602ba71', '男', '2198902814@qq.com', '13652707142');
 
 -- ----------------------------
 -- Table structure for wishlist
