@@ -4,55 +4,55 @@ server:
     context-path: /incomeExpense
 
 spring:
-   mvc:
-     view:
-       prefix: /   # �����webappĿ¼
-       suffix: .jsp
+  mvc:
+    view:
+      prefix: /   # 相对于webapp目录
+      suffix: .jsp
 
 
-     #����ϵͳ��Ĭ������,����Ĭ�����õ� /** ӳ�䵽 /static ����/public��/resources��/META-INF/resources��
-#     static-path-pattern: /**
-#   resources:
-#     static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
+    #首先系统有默认配置,其中默认配置的 /** 映射到 /static （或/public、/resources、/META-INF/resources）
+  #     static-path-pattern: /**
+  #   resources:
+  #     static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
 
-   # �����
-   profiles:
-     active: dev
-#     active: pro
-   servlet:
-       multipart:
-         #�����ļ��ϴ���С
-         max-file-size: 10MB
-         #�������ϴ���С
-         max-request-size: 100MB
+  # 激活环境
+  profiles:
+    active: dev
+  #     active: pro
+  servlet:
+    multipart:
+      #单个文件上传大小
+      max-file-size: 10MB
+      #总数据上传大小
+      max-request-size: 100MB
 
-   #�����Ȳ���
-   devtools:
-      restart:
-        enabled: true
+  #开启热部署
+  devtools:
+    restart:
+      enabled: true
 
-#mybatis����
+#mybatis配置
 mybatis:
-  #����SQLӳ���ļ�·��
+  #配置SQL映射文件路径
   mapper-locations: classpath:mapper/*.xml
-  #���ñ���
+  #配置别名
   type-aliases-package: com.mzl.incomeexpensemanagesystem1.entity
-  #�շ�����
+  #驼峰命名
   configuration:
     map-underscore-to-camel-case: false
 
-#   # ����ѭ������
+#   # 允许循环依赖
 #   main:
 #     allow-circular-references: true
 #
-#   # ͳ���ܼ�ؿ��ӻ�����Ŀͻ��ˣ���Client��Ϊ����ע�ᵽServer��ͨ��Server��������Ŀ�����������spring-boot-admin-client��
+#   # 统性能监控可视化界面的客户端，将Client作为服务注册到Server，通过Server来监听项目的运行情况【spring-boot-admin-client】
 #   boot:
 #     admin:
 #       client:
 #         enabled: true
-#         url: http://localhost:9999/incomeExpense  # ��Ŀ�������(��)·��
+#         url: http://localhost:9999/incomeExpense  # 项目请求基础(根)路径
 #
-## ͳ���ܼ�ؼ�أ�ͨ������������������еļ�ض˵㣬Ĭ������£���Щ�˵��ǽ��õģ���spring-boot-admin-client��
+## 统性能监控监控，通过下面的配置启用所有的监控端点，默认情况下，这些端点是禁用的；【spring-boot-admin-client】
 #management:
 #  endpoints:
 #    web:
