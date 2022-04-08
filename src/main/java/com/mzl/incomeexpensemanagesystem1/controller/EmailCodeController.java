@@ -2,6 +2,7 @@ package com.mzl.incomeexpensemanagesystem1.controller;
 
 import com.mzl.incomeexpensemanagesystem1.utils.EmailCodeUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.mail.MessagingException;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * @Version: 1.0
  */
 @Controller
+@CrossOrigin(origins = "*")
 public class EmailCodeController {
 
     //发送邮箱验证码

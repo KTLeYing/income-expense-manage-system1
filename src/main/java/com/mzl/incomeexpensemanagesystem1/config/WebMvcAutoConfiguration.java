@@ -80,7 +80,9 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
                         "/targets",
                         "/targets/**",
                         "/static/**",
-                        "/api/**"
+                        "/api/**",
+                        "/",
+                        "/incomeExpense/"
                 );
 
         registry.addInterceptor(fileTypeInterceptor())

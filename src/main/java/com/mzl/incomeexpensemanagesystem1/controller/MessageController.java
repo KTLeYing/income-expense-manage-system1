@@ -2,6 +2,7 @@ package com.mzl.incomeexpensemanagesystem1.controller;
 
 import com.mzl.incomeexpensemanagesystem1.utils.SendSMSUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.util.TimerTask;
  * @Version: 1.0
  */
 @Controller
+@CrossOrigin(origins = "*")
 public class MessageController {
 
     /**

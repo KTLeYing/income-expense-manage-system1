@@ -4,6 +4,7 @@ import com.mzl.incomeexpensemanagesystem1.entity.ShouzhiCategory;
 import com.mzl.incomeexpensemanagesystem1.service.ShouzhiCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/shouzhiCategory")   //访问路径是  /shouzhiCategory/xxx
+@CrossOrigin(origins = "*")
 public class ShouzhiCategoryController {
 
     @Autowired

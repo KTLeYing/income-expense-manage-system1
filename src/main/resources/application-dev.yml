@@ -50,7 +50,7 @@ spring:
         reset-enable: false
         # 登录用户名/密码
         login-username: root
-        login-password: 0.00.0
+        login-password: 105293
 
   #Redis服务器地址
   redis:
