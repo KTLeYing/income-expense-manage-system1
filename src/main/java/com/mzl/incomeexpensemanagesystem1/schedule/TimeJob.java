@@ -210,7 +210,7 @@ public class TimeJob {
                     "&nbsp;&nbsp;&nbsp;今天也要记得和智能收支管理平台交流噢！<br/>" +
                     "&nbsp;&nbsp;&nbsp;智能收支管理平台助你消费更理智！<br/>" +
                     "&nbsp;&nbsp;&nbsp;赶紧登录智能收支管理平台记录今天的个人收支情况鸭鸭~<br/>" +
-                    "&nbsp;&nbsp;&nbsp;登录地址：http://localhost:9999/incomeExpense<br/>" +
+                    "&nbsp;&nbsp;&nbsp;登录地址：http://120.48.4.18:9999/incomeExpense<br/>" +
                     "智能收支管理平台陪伴您每一天！祝您每天生活愉快！<br/><br/>";
 
             //开启一个线程发送邮件
