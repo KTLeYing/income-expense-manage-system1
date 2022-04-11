@@ -6,11 +6,11 @@ server:
 spring:
   mvc:
     view:
-      prefix: /   # 相对于webapp目录
+      prefix: /   # 相对于 webapp 目录
       suffix: .jsp
 
 
-    #首先系统有默认配置,其中默认配置的 /** 映射到 /static （或/public、/resources、/META-INF/resources）
+    #首先系统它有默认配置,其中默认配置的 /** 映射到 /static （或/public、/resources、/META-INF/resources）
   #     static-path-pattern: /**
   #   resources:
   #     static-locations: classpath:/resources/, classpath:/static/, classpath:/public/
