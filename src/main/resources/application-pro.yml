@@ -3,7 +3,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 105293
-    url: jdbc:mysql://localhost:3306/financialmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3306/financialmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://120.48.4.18:3306/financialmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     #配置Druid
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -55,7 +56,8 @@ spring:
   # Redis
   #Redis服务器地址
   redis:
-    host: localhost
+    host: 120.48.4.18
+    #    host: localhost
     #Redis服务器连接端口
     port: 6379
     #密码
